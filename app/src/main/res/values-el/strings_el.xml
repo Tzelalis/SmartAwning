@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="toolbar_title">Έξυπνη Τέντα</string>
+
+    <string name="rename_item">Μετονομασία</string>
+    <string name="delete_item">Διαγραφή</string>
+
+    <string name="rainTitle" translatable="false">Βροχή</string>
+    <string name="rainDescription">Η τέντα θα κατεβαίνει αυτόματα όταν βρέχει.</string>
+
+    <string name="sunTitle">Ήλιος</string>
+    <string name="sunDescription">Η τέντα θα ανεβαίνει αυτόματα όταν έχει ηλιοφάνεια.</string>
+
+    <string name="timeTitle">Ωριαίο Πρόγραμμα</string>
+    <string name="timeDescription">Η τέντα θα παραμένει πάντα κατεβασμένη κατά την διάρκεια των επιλεγμένων ωρών.</string>
+
+    <string name="deleteDialogTitle">Διαγραφή</string>
+    <string name="deleteDescription">Θέλετε να διαγράψετε οριστικά τη τέντα \"%1$s\";</string>
+    <string name="deleteDialogPositiveButton">Διαγραφή</string>
+    <string name="deleteDialogNegativeButton">Όχι</string>
+    <string name="renameDialogTitle">Μετονομασία</string>
+    <string name="renameDialogDescription">Μετονομασία της τέντας \"%1$s\" σε:</string>
+    <string name="renameDialogPositiveButton">Μετονομασία</string>
+    <string name="renameDialogNegativeButton">Ακύρωση</string>
+    <string name="addItem">Προσθήκη</string>
+
+</resources>

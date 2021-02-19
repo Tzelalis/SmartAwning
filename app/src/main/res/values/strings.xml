@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name" translatable="false">Smart Awning</string>
+
+    <string name="toolbar_title">Smart Awning</string>
+
+    <string name="rename_item">Rename</string>
+    <string name="delete_item">Delete</string>
+
+    <string name="rainTitle">Rain</string>
+    <string name="rainDescription">The awning goes down automatically when it rains.</string>
+
+    <string name="sunTitle">Sun</string>
+    <string name="sunDescription">The awning goes down automatically when it\'s sunny.</string>
+
+    <string name="timeTitle">Time</string>
+    <string name="timeDescription">sdf</string>
+
+    <string name="deleteDialogTitle">Delete</string>
+    <string name="deleteDescription">%1$s</string>
+    <string name="deleteDialogPositiveButton">Delete</string>
+    <string name="deleteDialogNegativeButton">No</string>
+    <string name="renameDialogTitle">Rename</string>
+    <string name="renameDialogDescription">Rename</string>
+    <string name="renameDialogPositiveButton">Rename</string>
+    <string name="renameDialogNegativeButton">Cancel</string>
+    <string name="addItem">Add</string>
+</resources>
