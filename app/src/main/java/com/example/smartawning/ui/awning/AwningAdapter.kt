@@ -29,7 +29,7 @@ class AwningAdapter(private val listener : AwningListener) : ListAdapter<AwningE
     inner class AwningViewHolder(private val binding : ItemAwningBinding) : RecyclerView.ViewHolder(binding.root){
         fun bindTo(item : AwningEntity)    {
             with(binding)   {
-                nameTextView.text = item.id.toString()
+                nameTextView.text = item.name.toString()
 
                 root.setOnClickListener { listener.onAwningItemClick(item) }
             }

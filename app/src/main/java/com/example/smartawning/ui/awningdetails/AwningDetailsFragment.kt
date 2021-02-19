@@ -21,6 +21,8 @@ import com.example.smartawning.databinding.FragmentAwningDetailsBinding
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -103,6 +105,14 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)
                 }
             }
+
+            testButton.setOnClickListener{
+                val materialTimePicker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .build()
+
+                materialTimePicker.show(requireActivity().supportFragmentManager, "test")
+            }
         }
     }
 
@@ -156,7 +166,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             builder.apply {
                 setTitle(resources.getString(R.string.renameDialogTitle))
                 setIcon(R.drawable.ic_baseline_drive_file_rename_outline_24)
-                setMessage(String.format(resources.getString(R.string.deleteDescription), name))
+                setMessage(String.format(resources.getString(R.string.renameDialogDescription), name))
 
                 val editText = EditText(activity)
                 editText.setText(args.awning.name)
@@ -171,8 +181,12 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                 setView(container)
 
 
-                setPositiveButton(resources.getString(R.string.renameDialogPositiveButton)) { dialog, id ->
-                    //todo rename tenta
+                setPositiveButton(resources.getString(R.string.renameDialogPositiveButton)) { _, _ ->
+                    args.awning.name = editText.text.toString()
+
+                    viewModel.updateLocalAwning(args.awning)
+                    (activity as? AppActivity)?.supportActionBar?.title = args.awning.name
+
                 }
                 setNeutralButton(resources.getString(R.string.renameDialogNegativeButton)) { dialog, id ->
                     // User cancelled the dialog

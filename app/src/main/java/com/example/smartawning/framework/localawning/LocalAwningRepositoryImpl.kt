@@ -18,6 +18,6 @@ class LocalAwningRepositoryImpl(private val database: AppDatabase) : LocalAwning
     }
 
     override suspend fun updateAwning(awning: AwningEntity) {
-
+        database.userDao().updateAwning(awning)
     }
 }

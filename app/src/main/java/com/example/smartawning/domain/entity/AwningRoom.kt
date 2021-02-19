@@ -13,8 +13,8 @@ abstract class AppDatabase : RoomDatabase() {
 @Entity(tableName = "awning")
 data class AwningEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "ip_address") val ipAddress: String,
-    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "ip_address") var ipAddress: String,
+    @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "mac_address") val macAddress: String
 ) : Parcelable
 
@@ -32,4 +32,7 @@ interface AwningDao {
 
     @Delete
     suspend fun deleteAwning(awning: AwningEntity)
+
+    @Update
+    suspend fun updateAwning(awning: AwningEntity)
 }
