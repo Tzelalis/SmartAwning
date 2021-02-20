@@ -12,7 +12,7 @@ interface AwningApi {
     suspend fun detectAwning(ipAddress : String, @Query("smart") type : String = "awning") : Response<RemoteDetectAwning>
 
     @GET("/device/info")
-    suspend fun getAwningConfig(ipAddress : String): Response<RemoteAwningConfig>
+    suspend fun getAwningConfig(): Response<RemoteAwningConfig>
 
     @GET("")
     suspend fun updateRainSensor()

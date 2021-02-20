@@ -16,7 +16,7 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
 
     override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
         return apiCall {
-            api.getAwningConfig(ipAddress)
+            api.getAwningConfig()
         }.toAwningConfig()
     }
 
