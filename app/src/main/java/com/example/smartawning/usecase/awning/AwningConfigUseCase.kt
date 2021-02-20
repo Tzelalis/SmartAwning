@@ -7,6 +7,6 @@ class AwningConfigUseCase(
     private val dataSource: AwningDataSource
 ) {
     suspend operator fun invoke(ipAddress: String): AwningConfig {
-        return dataSource.getAwningConfig()
+        return dataSource.getAwningConfig(ipAddress)
     }
 }

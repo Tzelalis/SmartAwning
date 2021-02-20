@@ -32,6 +32,9 @@ class AwningDetailsViewModel @Inject constructor(
         launch(true) {
             val result = awningConfigUseCase(id)
             _awningConfig.value = result
+
+            //testing
+            //_awningConfig.value = AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")
         }
     }
 

@@ -6,7 +6,7 @@ import com.example.smartawning.domain.entity.DetectAwning
 interface AwningRepository {
     suspend fun detectAwning(ipAddress : String) : DetectAwning
 
-    suspend fun getAwningConfig() : AwningConfig
+    suspend fun getAwningConfig(ipAddress : String) : AwningConfig
 
     suspend fun updateRainSensor() : AwningConfig
 

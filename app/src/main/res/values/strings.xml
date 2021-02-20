@@ -29,4 +29,6 @@
     <string name="addItem">Add</string>
 
     <string name="timeFormat" translatable="false">%1$s:%2$s</string>
+    <string name="downAwningPosition">Down</string>
+    <string name="upAwningPosition">Up</string>
 </resources>

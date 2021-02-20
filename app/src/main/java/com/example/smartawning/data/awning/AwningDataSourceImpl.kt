@@ -9,8 +9,8 @@ class AwningDataSourceImpl (private val repo : AwningRepository): AwningDataSour
         return repo.detectAwning(ipAddress)
     }
 
-    override suspend fun getAwningConfig(): AwningConfig {
-        return repo.getAwningConfig()
+    override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
+        return repo.getAwningConfig(ipAddress)
     }
 
     override suspend fun updateSunSensor(): AwningConfig {

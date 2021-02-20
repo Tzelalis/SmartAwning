@@ -73,6 +73,12 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             sunConstraintLayout.animation = null
             timeConstraintLayout.animation = null
 
+            temperatureTextView.isVisible = true
+            positionSlider.isVisible = true
+            downDescriptionTextView.isVisible = true
+            upDescriptionTextView.isVisible = true
+            positionDescriptionTextView.isVisible = true
+
             sunSwitcher.isVisible = true
             sunTitleTextView.isVisible = true
             sunDescriptionTextView.isVisible = true
@@ -89,9 +95,6 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             startTimeTextView.isVisible = true
             stopTimeTextView.isVisible = true
             seperatorTimeTextView.isVisible = true
-
-            temperatureTextView.isVisible = true
-            positionSlider.isVisible = true
         }
     }
 
@@ -116,6 +119,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
 
             sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+
                     binding.sunImageView.setImageResource(R.drawable.ic_sun)
                 } else {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)

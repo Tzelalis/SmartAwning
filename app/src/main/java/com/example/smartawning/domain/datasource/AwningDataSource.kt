@@ -7,7 +7,7 @@ interface AwningDataSource {
 
     suspend fun detectAwning(ipAddress : String) : DetectAwning
 
-    suspend fun getAwningConfig() : AwningConfig
+    suspend fun getAwningConfig(ipAddress : String) : AwningConfig
 
     suspend fun updateSunSensor() : AwningConfig
 
