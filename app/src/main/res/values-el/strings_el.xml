@@ -14,6 +14,9 @@
     <string name="timeTitle">Ωριαίο Πρόγραμμα</string>
     <string name="timeDescription">Η τέντα θα παραμένει πάντα κατεβασμένη κατά την διάρκεια των επιλεγμένων ωρών.</string>
 
+    <string name="selectTimeStartTitle">Επιλέξτε ώρα έναρξης</string>
+    <string name="selectTimeEndTitle">Επιλέξτε ώρα τέλους</string>
+
     <string name="deleteDialogTitle">Διαγραφή</string>
     <string name="deleteDescription">Θέλετε να διαγράψετε οριστικά τη τέντα \"%1$s\";</string>
     <string name="deleteDialogPositiveButton">Διαγραφή</string>

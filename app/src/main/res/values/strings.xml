@@ -15,6 +15,9 @@
     <string name="timeTitle">Time</string>
     <string name="timeDescription">sdf</string>
 
+    <string name="selectTimeStartTitle">Select starting time</string>
+    <string name="selectTimeEndTitle">Select ending time</string>
+
     <string name="deleteDialogTitle">Delete</string>
     <string name="deleteDescription">%1$s</string>
     <string name="deleteDialogPositiveButton">Delete</string>
@@ -24,4 +27,6 @@
     <string name="renameDialogPositiveButton">Rename</string>
     <string name="renameDialogNegativeButton">Cancel</string>
     <string name="addItem">Add</string>
+
+    <string name="timeFormat" translatable="false">%1$s:%2$s</string>
 </resources>

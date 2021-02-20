@@ -2,6 +2,7 @@ package com.example.smartawning.ui.awningdetails
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -106,12 +107,44 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                 }
             }
 
-            testButton.setOnClickListener{
+            timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked){
+                    binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
+                    binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
+                    binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
+                }else   {
+                    binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
+                    binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
+                    binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
+                }
+            }
+
+            startTimeTextView.setOnClickListener{
                 val materialTimePicker = MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setTitleText(resources.getString(R.string.selectTimeStartTitle))
                     .build()
 
+                materialTimePicker.addOnPositiveButtonClickListener {
+                    startTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
+                }
+
                 materialTimePicker.show(requireActivity().supportFragmentManager, "test")
+            }
+
+            stopTimeTextView.setOnClickListener{
+                val materialTimePicker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setTitleText(resources.getString(R.string.selectTimeEndTitle))
+                    .build()
+
+                materialTimePicker.addOnPositiveButtonClickListener {
+                    stopTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
+                }
+
+                materialTimePicker.show(requireActivity().supportFragmentManager, "test")
+
+
             }
         }
     }
