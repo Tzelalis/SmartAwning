@@ -27,4 +27,7 @@
     <string name="renameDialogNegativeButton">Ακύρωση</string>
     <string name="addItem">Προσθήκη</string>
 
+    <string name="downAwningPosition">Κατεβασμένη</string>
+    <string name="upAwningPosition">Ανεβασμένη</string>
+
 </resources>

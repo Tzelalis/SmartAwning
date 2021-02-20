@@ -2,6 +2,8 @@ package com.example.smartawning.ui.awningdetails
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.AwningEntity
 import com.example.smartawning.usecase.awning.*
@@ -10,7 +12,9 @@ import com.example.smartawning.usecase.localawning.InsertLocalAwningUseCase
 import com.example.smartawning.usecase.localawning.UpdateLocalAwningUseCase
 import com.example.vaseisapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 @HiltViewModel
 class AwningDetailsViewModel @Inject constructor(
@@ -30,8 +34,7 @@ class AwningDetailsViewModel @Inject constructor(
 
     fun loadAwningConfig(id: String) {
         launch(true) {
-            val result = awningConfigUseCase(id)
-            _awningConfig.value = result
+            _awningConfig = awningConfigUseCase(id).asLiveData(coroutineContext, 15) as MutableLiveData<AwningConfig>
 
             //testing
             //_awningConfig.value = AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")
@@ -50,25 +53,25 @@ class AwningDetailsViewModel @Inject constructor(
         }
     }
 
-    fun updateSunSensor(ipAddress : String, isEnable: Boolean) {
+    fun updateSunSensor(ipAddress: String, isEnable: Boolean) {
         launch(true) {
             updateSunSensorUseCase(ipAddress, isEnable)
         }
     }
 
-    fun updateRainSensor(ipAddress : String, isEnable: Boolean) {
+    fun updateRainSensor(ipAddress: String, isEnable: Boolean) {
         launch(true) {
             updateRainSensorUseCase(ipAddress, isEnable)
         }
     }
 
-    fun updateTimeProgram(ipAddress : String, isEnable: Boolean) {
+    fun updateTimeProgram(ipAddress: String, isEnable: Boolean, startHour: String, startMin: String, stopHour: String, stopMin: String) {
         launch(true) {
-            updateTimeProgramUseCase(ipAddress)
+            updateTimeProgramUseCase(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
         }
     }
 
-    fun updateAwningPosition(ipAddress : String, position: Int) {
+    fun updateAwningPosition(ipAddress: String, position: Int) {
         launch(true) {
             updateAwningPositionUseCase(ipAddress, position)
         }

@@ -58,6 +58,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             timeSwitcher.isChecked = config.isTimeChecked
             startTimeTextView.text = config.timeStart
             stopTimeTextView.text = config.timeEnd
+            temperatureTextView.text = String.format(resources.getString(R.string.temperatureText), config.temperature)
 
             //todo better if state
             if(!sunSwitcher.isVisible)    {
@@ -110,6 +111,8 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             timeConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
 
             rainSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.updateRainSensor(args.awning.ipAddress, isChecked)
+
                 if (isChecked) {
                     binding.rainImageView.setImageResource(R.drawable.ic_rainy)
                 } else {
@@ -118,8 +121,9 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
+                viewModel.updateSunSensor(args.awning.ipAddress, isChecked)
 
+                if (isChecked) {
                     binding.sunImageView.setImageResource(R.drawable.ic_sun)
                 } else {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)
@@ -127,6 +131,8 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.updateTimeProgram(args.awning.ipAddress, isChecked, "0", "0", "0", "0")
+
                 if(isChecked){
                     binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))

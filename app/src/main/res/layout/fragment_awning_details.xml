@@ -35,21 +35,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/roboto"
-            android:text="36\u2103"
             android:textSize="36sp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:text="36\u2103"
             tools:visibility="visible" />
 
         <TextView
             android:id="@+id/positionDescriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Αλλάξτε τη θέση της τέντας χειροκίνητα.\n "
-            android:visibility="invisible"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:text="Αλλάξτε τη θέση της τέντας χειροκίνητα.\n "
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/positionSlider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,12 +162,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="11:30 πμ"
             android:textSize="32sp"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/seperatorTimeTextView"
+            tools:text="11:30 πμ"
             tools:visibility="visible" />
 
         <TextView
@@ -192,12 +192,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="16:30 μμ"
             android:textSize="32sp"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/seperatorTimeTextView"
+            tools:text="16:30 μμ"
             tools:visibility="visible" />
 
 

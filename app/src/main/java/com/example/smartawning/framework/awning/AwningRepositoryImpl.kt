@@ -1,6 +1,7 @@
 package com.example.smartawning.framework.awning
 
 import com.example.smartawning.data.awning.AwningRepository
+import com.example.smartawning.data.awning.RemoteSensorResponse
 import com.example.smartawning.data.awning.toAwningConfig
 import com.example.smartawning.data.awning.toDetectAwning
 import com.example.smartawning.domain.entity.AwningConfig
@@ -20,16 +21,29 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
         }.toAwningConfig()
     }
 
-    override suspend fun updateRainSensor(): AwningConfig {
-        TODO("Not yet implemented")
+    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+        return apiCall {
+            api.updateRainSensor(isEnable)
+        }
     }
 
-    override suspend fun updateSunSensor(): AwningConfig {
-        TODO("Not yet implemented")
+    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+        return apiCall {
+            api.updateSunSensor(isEnable)
+        }
     }
 
-    override suspend fun updateTimeProgram(): AwningConfig {
-        TODO("Not yet implemented")
+    override suspend fun updateTimeProgram(
+        ipAddress: String,
+        isEnable: Boolean,
+        startHour: String,
+        startMin: String,
+        stopHour: String,
+        stopMin: String
+    ): RemoteSensorResponse {
+        return apiCall {
+            api.updateTimeProgram(isEnable, startHour, startMin, stopHour, stopMin)
+        }
     }
 
     override suspend fun updateAwningPosition(): AwningConfig {

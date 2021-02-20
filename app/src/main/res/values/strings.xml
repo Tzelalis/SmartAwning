@@ -31,4 +31,6 @@
     <string name="timeFormat" translatable="false">%1$s:%2$s</string>
     <string name="downAwningPosition">Down</string>
     <string name="upAwningPosition">Up</string>
+
+    <string name="temperatureText" translatable="false">%1$s\u2103</string>
 </resources>

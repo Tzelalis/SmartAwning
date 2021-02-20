@@ -26,6 +26,11 @@ data class UpdateSensorRequest(
     var isEnable: Boolean
 )
 
+data class RemoteSensorResponse(
+    val code : String,
+    val message : String
+)
+
 fun RemoteAwningConfig.toAwningConfig(): AwningConfig {
     return AwningConfig(
         temperature?: "",

@@ -3,26 +3,42 @@ package com.example.smartawning.data.awning
 import com.example.smartawning.domain.datasource.AwningDataSource
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.DetectAwning
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class AwningDataSourceImpl (private val repo : AwningRepository): AwningDataSource {
+class AwningDataSourceImpl(private val repo: AwningRepository) : AwningDataSource {
     override suspend fun detectAwning(ipAddress: String): DetectAwning {
         return repo.detectAwning(ipAddress)
     }
 
-    override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
-        return repo.getAwningConfig(ipAddress)
+    override suspend fun getAwningConfig(ipAddress: String): Flow<AwningConfig> {
+        return flow {
+            while (true) {
+                val config = repo.getAwningConfig(ipAddress)
+                emit(config)
+                delay(5000)
+            }
+        }
     }
 
-    override suspend fun updateSunSensor(): AwningConfig {
-        return repo.updateSunSensor()
+    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+        return repo.updateSunSensor(ipAddress, isEnable)
     }
 
-    override suspend fun updateRainSensor(): AwningConfig {
-        return repo.updateRainSensor()
+    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+        return repo.updateRainSensor(ipAddress, isEnable)
     }
 
-    override suspend fun updateTimeProgram(): AwningConfig {
-        return repo.updateTimeProgram()
+    override suspend fun updateTimeProgram(
+        ipAddress: String,
+        isEnable: Boolean,
+        startHour: String,
+        startMin: String,
+        stopHour: String,
+        stopMin: String
+    ): RemoteSensorResponse {
+        return repo.updateTimeProgram(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
     }
 
     override suspend fun updateAwningPosition(): AwningConfig {
