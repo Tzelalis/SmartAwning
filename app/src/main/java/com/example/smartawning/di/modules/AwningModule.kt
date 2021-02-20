@@ -40,7 +40,7 @@ object AwningModule {
     @Provides
     fun provideRetrofitForAwning(@AwningHttpClient okHttpClient: OkHttpClient, moshi: Moshi): AwningApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.2.6")
+            //.baseUrl("http://192.168.2.6/")
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
