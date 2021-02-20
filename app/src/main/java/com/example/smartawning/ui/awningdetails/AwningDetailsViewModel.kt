@@ -1,6 +1,7 @@
 package com.example.smartawning.ui.awningdetails
 
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
@@ -30,11 +31,11 @@ class AwningDetailsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var _awningConfig = MutableLiveData<AwningConfig>()
-    val awningConfig = _awningConfig
+    var awningConfig : LiveData<AwningConfig> = _awningConfig
 
     fun loadAwningConfig(id: String) {
         launch(true) {
-            _awningConfig = awningConfigUseCase(id).asLiveData(coroutineContext, 15) as MutableLiveData<AwningConfig>
+            awningConfig = awningConfigUseCase(id).asLiveData()
 
             //testing
             //_awningConfig.value = AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")

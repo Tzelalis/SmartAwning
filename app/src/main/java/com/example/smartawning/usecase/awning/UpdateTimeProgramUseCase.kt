@@ -1,7 +1,7 @@
 package com.example.smartawning.usecase.awning
 
-import com.example.smartawning.data.awning.RemoteSensorResponse
 import com.example.smartawning.domain.datasource.AwningDataSource
+import com.example.smartawning.domain.entity.SensorResponse
 
 class UpdateTimeProgramUseCase(
     private val dataSource: AwningDataSource
@@ -13,7 +13,7 @@ class UpdateTimeProgramUseCase(
         startMin: String,
         stopHour: String,
         stopMin: String
-    ): RemoteSensorResponse {
+    ): SensorResponse {
         return dataSource.updateTimeProgram(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
     }
 }

@@ -2,6 +2,7 @@ package com.example.smartawning.data.awning
 
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.DetectAwning
+import com.example.smartawning.domain.entity.SensorResponse
 import com.squareup.moshi.Json
 
 data class RemoteAwningConfig(
@@ -21,14 +22,9 @@ data class RemoteDetectAwning(
     val mac: String?
 )
 
-data class UpdateSensorRequest(
-    var ip: String,
-    var isEnable: Boolean
-)
-
 data class RemoteSensorResponse(
-    val code : String,
-    val message : String
+    val code : String?,
+    val message : String?
 )
 
 fun RemoteAwningConfig.toAwningConfig(): AwningConfig {
@@ -49,5 +45,12 @@ fun RemoteDetectAwning.toDetectAwning(): DetectAwning {
         ip ?: "",
         name ?: "",
         mac ?: ""
+    )
+}
+
+fun RemoteSensorResponse.toSensorResponse() : SensorResponse    {
+    return SensorResponse(
+        code ?: "",
+        message ?: ""
     )
 }

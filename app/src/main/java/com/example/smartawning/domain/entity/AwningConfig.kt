@@ -17,3 +17,8 @@ data class AwningConfig(
     val timeStart: String,
     val timeEnd: String
 )
+
+data class SensorResponse(
+    val code : String,
+    val message : String
+)

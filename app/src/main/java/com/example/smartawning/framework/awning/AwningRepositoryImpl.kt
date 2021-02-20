@@ -1,11 +1,9 @@
 package com.example.smartawning.framework.awning
 
-import com.example.smartawning.data.awning.AwningRepository
-import com.example.smartawning.data.awning.RemoteSensorResponse
-import com.example.smartawning.data.awning.toAwningConfig
-import com.example.smartawning.data.awning.toDetectAwning
+import com.example.smartawning.data.awning.*
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.DetectAwning
+import com.example.smartawning.domain.entity.SensorResponse
 import com.example.smartawning.utils.apiCall
 
 class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
@@ -21,16 +19,16 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
         }.toAwningConfig()
     }
 
-    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
             api.updateRainSensor(isEnable)
-        }
+        }.toSensorResponse()
     }
 
-    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
             api.updateSunSensor(isEnable)
-        }
+        }.toSensorResponse()
     }
 
     override suspend fun updateTimeProgram(
@@ -40,10 +38,10 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
         startMin: String,
         stopHour: String,
         stopMin: String
-    ): RemoteSensorResponse {
+    ): SensorResponse {
         return apiCall {
             api.updateTimeProgram(isEnable, startHour, startMin, stopHour, stopMin)
-        }
+        }.toSensorResponse()
     }
 
     override suspend fun updateAwningPosition(): AwningConfig {

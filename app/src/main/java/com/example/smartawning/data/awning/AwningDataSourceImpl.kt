@@ -3,6 +3,7 @@ package com.example.smartawning.data.awning
 import com.example.smartawning.domain.datasource.AwningDataSource
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.DetectAwning
+import com.example.smartawning.domain.entity.SensorResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,11 +23,11 @@ class AwningDataSourceImpl(private val repo: AwningRepository) : AwningDataSourc
         }
     }
 
-    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+    override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return repo.updateSunSensor(ipAddress, isEnable)
     }
 
-    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): RemoteSensorResponse {
+    override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return repo.updateRainSensor(ipAddress, isEnable)
     }
 
@@ -37,7 +38,7 @@ class AwningDataSourceImpl(private val repo: AwningRepository) : AwningDataSourc
         startMin: String,
         stopHour: String,
         stopMin: String
-    ): RemoteSensorResponse {
+    ): SensorResponse {
         return repo.updateTimeProgram(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
     }
 
