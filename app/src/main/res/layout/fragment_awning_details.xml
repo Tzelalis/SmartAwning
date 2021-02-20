@@ -37,19 +37,58 @@
             android:fontFamily="@font/roboto"
             android:text="36\u2103"
             android:textSize="36sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/timeRangeSlider"
+        <TextView
+            android:id="@+id/positionDescriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="Αλλάξτε τη θέση της τέντας χειροκίνητα.\n "
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/positionSlider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/positionSlider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:valueFrom="0"
             android:valueTo="100"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/downDescriptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/downDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Κατεβασμένη"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/positionSlider"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/upDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Ανεβασμένη"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/positionSlider"
             tools:visibility="visible" />
 
 
@@ -124,8 +163,10 @@
             android:text="11:30 πμ"
             android:textSize="32sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/seperatorTimeTextView" />
+            app:layout_constraintEnd_toStartOf="@id/seperatorTimeTextView"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/seperatorTimeTextView"
@@ -136,10 +177,12 @@
             android:text="-"
             android:textSize="32sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/centerGuidLine1"
             app:layout_constraintStart_toEndOf="@id/startTimeTextView"
-            app:layout_constraintStart_toStartOf="@id/centerGuidLine1" />
+            app:layout_constraintStart_toStartOf="@id/centerGuidLine1"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/stopTimeTextView"
@@ -150,8 +193,10 @@
             android:text="16:30 μμ"
             android:textSize="32sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/seperatorTimeTextView" />
+            app:layout_constraintStart_toEndOf="@id/seperatorTimeTextView"
+            tools:visibility="visible" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

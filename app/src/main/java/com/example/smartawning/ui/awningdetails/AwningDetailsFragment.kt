@@ -2,7 +2,6 @@ package com.example.smartawning.ui.awningdetails
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -45,19 +44,30 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
     private fun setupObservers() {
         with(viewModel) {
             awningConfig.observe(viewLifecycleOwner, { config ->
-                setupViewWithConfig(config)
+                loadData(config)
             })
 
             loadAwningConfig(args.awning.name)
         }
     }
 
-    private fun setupViewWithConfig(config: AwningConfig) {
+    private fun loadData(config: AwningConfig) {
         with(binding) {
             rainSwitcher.isChecked = config.isRainChecked
             sunSwitcher.isChecked = config.isSunnyChecked
             timeSwitcher.isChecked = config.isTimeChecked
+            startTimeTextView.text = config.timeStart
+            stopTimeTextView.text = config.timeEnd
 
+            //todo better if state
+            if(!sunSwitcher.isVisible)    {
+                setupViewsWithDataFirstTime()
+            }
+        }
+    }
+
+    private fun setupViewsWithDataFirstTime()   {
+        with(binding)   {
             controlConstraintLayout.animation = null
             rainConstraintLayout.animation = null
             sunConstraintLayout.animation = null
@@ -76,7 +86,12 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             timeSwitcher.isVisible = true
             timeTitleTextView.isVisible = true
             timeDescriptionTextView.isVisible = true
-            timeRangeSlider.isVisible = true
+            startTimeTextView.isVisible = true
+            stopTimeTextView.isVisible = true
+            seperatorTimeTextView.isVisible = true
+
+            temperatureTextView.isVisible = true
+            positionSlider.isVisible = true
         }
     }
 

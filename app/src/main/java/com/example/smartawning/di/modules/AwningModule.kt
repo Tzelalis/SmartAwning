@@ -7,7 +7,7 @@ import com.example.smartawning.di.scopes.AwningHttpClient
 import com.example.smartawning.domain.datasource.AwningDataSource
 import com.example.smartawning.framework.awning.AwningApi
 import com.example.smartawning.framework.awning.AwningRepositoryImpl
-import com.example.smartawning.usecase.awning.AwningConfigUseCase
+import com.example.smartawning.usecase.awning.*
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -40,7 +40,7 @@ object AwningModule {
     @Provides
     fun provideRetrofitForAwning(@AwningHttpClient okHttpClient: OkHttpClient, moshi: Moshi): AwningApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://192.168.2.1")
+            .baseUrl("http://192.168.2.6")
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -74,5 +74,29 @@ object AwningModule {
     @Provides
     fun provideAwningConfigUseCase(dataSource: AwningDataSource): AwningConfigUseCase {
         return AwningConfigUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateAwningPositionUseCase(dataSource: AwningDataSource): UpdateAwningPositionUseCase {
+        return UpdateAwningPositionUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateRainSensorUseCase(dataSource: AwningDataSource): UpdateRainSensorUseCase {
+        return UpdateRainSensorUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateSunSensorUseCase(dataSource: AwningDataSource): UpdateSunSensorUseCase {
+        return UpdateSunSensorUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateTimeProgramUseCase(dataSource: AwningDataSource): UpdateTimeProgramUseCase {
+        return UpdateTimeProgramUseCase(dataSource)
     }
 }
