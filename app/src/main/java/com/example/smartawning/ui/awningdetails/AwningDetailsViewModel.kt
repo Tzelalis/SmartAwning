@@ -3,8 +3,6 @@ package com.example.smartawning.ui.awningdetails
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.AwningEntity
 import com.example.smartawning.usecase.awning.*
@@ -15,7 +13,6 @@ import com.example.vaseisapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @HiltViewModel
 class AwningDetailsViewModel @Inject constructor(
@@ -31,11 +28,13 @@ class AwningDetailsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var _awningConfig = MutableLiveData<AwningConfig>()
-    var awningConfig : LiveData<AwningConfig> = _awningConfig
+    val awningConfig: LiveData<AwningConfig> = _awningConfig
 
     fun loadAwningConfig(id: String) {
         launch(true) {
-            awningConfig = awningConfigUseCase(id).asLiveData()
+            awningConfigUseCase(id).collect {
+                _awningConfig.value = it
+            }
 
             //testing
             //_awningConfig.value = AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")
