@@ -30,6 +30,6 @@ interface AwningApi {
         @Query("close_min") closeMin: String
     ) : Response<RemoteSensorResponse>
 
-    @GET("")
-    suspend fun updateAwning()
+    @GET("/device/set/bar")
+    suspend fun updateAwning(@Query("awning_value_percent")position : Int) : Response<RemoteSensorResponse>
 }

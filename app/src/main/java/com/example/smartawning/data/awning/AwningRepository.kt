@@ -15,5 +15,5 @@ interface AwningRepository {
 
     suspend fun updateTimeProgram(ipAddress: String, isEnable: Boolean, startHour : String, startMin : String, stopHour : String, stopMin : String) : SensorResponse
 
-    suspend fun updateAwningPosition() : AwningConfig
+    suspend fun updateAwningPosition(ipAddress: String, position : Int) : SensorResponse
 }

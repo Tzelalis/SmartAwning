@@ -1,6 +1,5 @@
 package com.example.smartawning.domain.datasource
 
-import com.example.smartawning.data.awning.RemoteSensorResponse
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.domain.entity.DetectAwning
 import com.example.smartawning.domain.entity.SensorResponse
@@ -25,6 +24,6 @@ interface AwningDataSource {
         stopMin: String
     ): SensorResponse
 
-    suspend fun updateAwningPosition(): AwningConfig
+    suspend fun updateAwningPosition(ipAddress: String, position : Int): SensorResponse
 
 }

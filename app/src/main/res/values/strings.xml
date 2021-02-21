@@ -33,4 +33,5 @@
     <string name="upAwningPosition">Up</string>
 
     <string name="temperatureText" translatable="false">%1$s\u2103</string>
+    <string name="live_data_description">Data refresh every 5\"</string>
 </resources>

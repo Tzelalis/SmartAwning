@@ -49,7 +49,9 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
         }.toSensorResponse()
     }
 
-    override suspend fun updateAwningPosition(): AwningConfig {
-        TODO("Not yet implemented")
+    override suspend fun updateAwningPosition(ipAddress: String, position : Int) : SensorResponse {
+        return apiCall {
+            api.updateAwning(position)
+        }.toSensorResponse()
     }
 }

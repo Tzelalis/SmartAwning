@@ -59,6 +59,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             startTimeTextView.text = config.timeStart
             stopTimeTextView.text = config.timeEnd
             temperatureTextView.text = String.format(resources.getString(R.string.temperatureText), config.temperature)
+            positionSlider.value = config.position.toFloat()
 
             //todo better if state
             if(!sunSwitcher.isVisible)    {
@@ -79,6 +80,9 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             downDescriptionTextView.isVisible = true
             upDescriptionTextView.isVisible = true
             positionDescriptionTextView.isVisible = true
+            progressBar.isVisible = true
+            positionPercentTextView.isVisible = true
+            positionPercentIconTextView.isVisible = true
 
             sunSwitcher.isVisible = true
             sunTitleTextView.isVisible = true
@@ -110,30 +114,36 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             controlConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
             timeConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
 
-            rainSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.updateRainSensor(args.awning.ipAddress, isChecked)
+            rainSwitcher.setOnClickListener {
+                viewModel.updateRainSensor(args.awning.ipAddress, rainSwitcher.isChecked)
+            }
 
-                if (isChecked) {
+            rainSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                if (rainSwitcher.isChecked) {
                     binding.rainImageView.setImageResource(R.drawable.ic_rainy)
                 } else {
                     binding.rainImageView.setImageResource(R.drawable.ic_not_rainy)
                 }
             }
 
-            sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.updateSunSensor(args.awning.ipAddress, isChecked)
+            sunSwitcher.setOnClickListener {
+                viewModel.updateSunSensor(args.awning.ipAddress, sunSwitcher.isChecked)
+            }
 
-                if (isChecked) {
+            sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                 if (sunSwitcher.isChecked) {
                     binding.sunImageView.setImageResource(R.drawable.ic_sun)
                 } else {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)
                 }
             }
 
-            timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.updateTimeProgram(args.awning.ipAddress, isChecked, "0", "0", "0", "0")
+            timeSwitcher.setOnClickListener {
+                viewModel.updateTimeProgram(args.awning.ipAddress, timeSwitcher.isChecked, "0", "0", "0", "0")
+            }
 
-                if(isChecked){
+            timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
+                if(timeSwitcher.isChecked){
                     binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
@@ -154,7 +164,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     startTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
                 }
 
-                materialTimePicker.show(requireActivity().supportFragmentManager, "test")
+                materialTimePicker.show(requireActivity().supportFragmentManager, "startTime")
             }
 
             stopTimeTextView.setOnClickListener{
@@ -167,9 +177,12 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     stopTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
                 }
 
-                materialTimePicker.show(requireActivity().supportFragmentManager, "test")
+                materialTimePicker.show(requireActivity().supportFragmentManager, "stopTime")
+            }
 
-
+            positionSlider.addOnChangeListener { _, value, _ ->
+                progressBar.progress = value.toInt()
+                positionPercentTextView.text = value.toInt().toString()
             }
         }
     }
@@ -180,20 +193,20 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.deleteItem -> showDeleteAlertDialog("Σαλόνι")
-            R.id.renameItem -> showRenameAlertDialog("PAOK")
+            R.id.deleteItem -> showDeleteAlertDialog()
+            R.id.renameItem -> showRenameAlertDialog()
             else -> super.onOptionsItemSelected(item)
         }
         return true
     }
 
-    private fun showDeleteAlertDialog(name: String) {
+    private fun showDeleteAlertDialog() {
         val alertDialog: AlertDialog? = activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.apply {
                 setTitle(resources.getString(R.string.deleteDialogTitle))
                 setIcon(R.drawable.ic_baseline_delete_forever_24)
-                setMessage(String.format(resources.getString(R.string.deleteDescription), name))
+                setMessage(String.format(resources.getString(R.string.deleteDescription), args.awning.name))
                 setPositiveButton(resources.getString(R.string.deleteDialogPositiveButton)) { dialog, id ->
                     viewModel.deleteLocalAwning(args.awning)
                     findNavController().navigateUp()
@@ -218,13 +231,13 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
         alertDialog?.show()
     }
 
-    private fun showRenameAlertDialog(name: String) {
+    private fun showRenameAlertDialog() {
         val alertDialog: AlertDialog? = activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.apply {
                 setTitle(resources.getString(R.string.renameDialogTitle))
                 setIcon(R.drawable.ic_baseline_drive_file_rename_outline_24)
-                setMessage(String.format(resources.getString(R.string.renameDialogDescription), name))
+                setMessage(String.format(resources.getString(R.string.renameDialogDescription), args.awning.name))
 
                 val editText = EditText(activity)
                 editText.setText(args.awning.name)

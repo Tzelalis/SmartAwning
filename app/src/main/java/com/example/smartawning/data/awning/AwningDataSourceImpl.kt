@@ -42,7 +42,7 @@ class AwningDataSourceImpl(private val repo: AwningRepository) : AwningDataSourc
         return repo.updateTimeProgram(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
     }
 
-    override suspend fun updateAwningPosition(): AwningConfig {
-        return repo.updateAwningPosition()
+    override suspend fun updateAwningPosition(ipAddress: String, position : Int): SensorResponse {
+        return repo.updateAwningPosition(ipAddress, position)
     }
 }

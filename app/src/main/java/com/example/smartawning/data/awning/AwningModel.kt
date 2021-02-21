@@ -8,7 +8,7 @@ import com.squareup.moshi.Json
 data class RemoteAwningConfig(
     val temperature : String?,
     val humidity : String?,
-    val position: Int?,
+    @Json(name = "awning_value") val position: Int?,
     @Json(name = "water_enable") val isRainChecked: Int?,
     @Json(name = "light_enable")val isSunnyChecked: Int?,
     @Json(name = "program_enable")val isTimeProgramChecked: Int?,

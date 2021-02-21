@@ -30,4 +30,6 @@
     <string name="downAwningPosition">Κατεβασμένη</string>
     <string name="upAwningPosition">Ανεβασμένη</string>
 
+    <string name="live_data_description">Ανανέωση πληροφοριών ανά 5\</string>
+
 </resources>
