@@ -17,11 +17,11 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
     }
 
     override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
-        /*return apiCall {
+        return apiCall {
             api.getAwningConfig()
-        }.toAwningConfig()*/
+        }.toAwningConfig()
 
-        return AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")  //testing
+        //return AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")  //testing
     }
 
     override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
