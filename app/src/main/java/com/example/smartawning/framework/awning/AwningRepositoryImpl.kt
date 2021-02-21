@@ -17,11 +17,11 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
     }
 
     override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
-        return apiCall {
+        /*return apiCall {
             api.getAwningConfig()
-        }.toAwningConfig()
+        }.toAwningConfig()*/
 
-        //return AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")  //testing
+        return AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")  //testing
     }
 
     override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
@@ -36,22 +36,27 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
         }.toSensorResponse()
     }
 
-    override suspend fun updateTimeProgram(
-        ipAddress: String,
-        isEnable: Boolean,
-        startHour: String,
-        startMin: String,
-        stopHour: String,
-        stopMin: String
-    ): SensorResponse {
+    override suspend fun updateTimeProgram(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
-            api.updateTimeProgram(isEnable, startHour, startMin, stopHour, stopMin)
+            api.updateTimeProgram(isEnable)
         }.toSensorResponse()
     }
 
-    override suspend fun updateAwningPosition(ipAddress: String, position : Int) : SensorResponse {
+    override suspend fun updateAwningPosition(ipAddress: String, position: Int): SensorResponse {
         return apiCall {
             api.updateAwning(position)
+        }.toSensorResponse()
+    }
+
+    override suspend fun updateStartTimeProgram(ipAddress: String, startHour : Int, startMin : Int): SensorResponse {
+        return apiCall {
+            api.updateStartTimeProgram(startHour, startMin)
+        }.toSensorResponse()
+    }
+
+    override suspend fun updateEndTimeProgram(ipAddress: String, endHour : Int, endMin : Int): SensorResponse {
+        return apiCall {
+            api.updateStartTimeProgram(endHour, endMin)
         }.toSensorResponse()
     }
 }

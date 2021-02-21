@@ -40,7 +40,7 @@ object AwningModule {
     @Provides
     fun provideRetrofitForAwning(@AwningHttpClient okHttpClient: OkHttpClient, moshi: Moshi): AwningApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.2.6/")
+            .baseUrl("http://46.176.166.222:300/")
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -96,7 +96,19 @@ object AwningModule {
 
     @ViewModelScoped
     @Provides
-    fun provideUpdateTimeProgramUseCase(dataSource: AwningDataSource): UpdateTimeProgramUseCase {
-        return UpdateTimeProgramUseCase(dataSource)
+    fun provideUpdateEnableProgramUseCase(dataSource: AwningDataSource): UpdateEnableProgramUseCase {
+        return UpdateEnableProgramUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateStartTimeProgramUseCase(dataSource: AwningDataSource): UpdateStartTimeProgramUseCase {
+        return UpdateStartTimeProgramUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideUpdateEndTimeProgramUseCase(dataSource: AwningDataSource): UpdateEndTimeProgramUseCase {
+        return UpdateEndTimeProgramUseCase(dataSource)
     }
 }

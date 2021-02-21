@@ -16,20 +16,20 @@ interface AwningApi {
     suspend fun getAwningConfig(): Response<RemoteAwningConfig>
 
     @GET("/device/set/water")
-    suspend fun updateRainSensor(@Query("sensor") isEnable: Boolean) : Response<RemoteSensorResponse>
+    suspend fun updateRainSensor(@Query("sensor") isEnable: Boolean): Response<RemoteSensorResponse>
 
     @GET("/device/set/light")
-    suspend fun updateSunSensor(@Query("sensor") isEnable: Boolean) : Response<RemoteSensorResponse>
+    suspend fun updateSunSensor(@Query("sensor") isEnable: Boolean): Response<RemoteSensorResponse>
 
     @GET("/device/set/program")
-    suspend fun updateTimeProgram(
-        @Query("program") isEnable: Boolean,
-        @Query("open_hour") openHour: String,
-        @Query("open_min") openMin: String,
-        @Query("close_hour") closeHour: String,
-        @Query("close_min") closeMin: String
-    ) : Response<RemoteSensorResponse>
+    suspend fun updateTimeProgram(@Query("enable") isEnable: Boolean): Response<RemoteSensorResponse>
+
+    @GET("/device/set/program")
+    suspend fun updateStartTimeProgram(@Query("open_hour") openHour: Int, @Query("open_min") openMin: Int): Response<RemoteSensorResponse>
+
+    @GET("/device/set/program")
+    suspend fun updateEndTimeProgram(@Query("close_hour") closeHour: Int, @Query("close_min") closeMin: Int): Response<RemoteSensorResponse>
 
     @GET("/device/set/bar")
-    suspend fun updateAwning(@Query("awning_value_percent")position : Int) : Response<RemoteSensorResponse>
+    suspend fun updateAwning(@Query("awning_value_percent") position: Int): Response<RemoteSensorResponse>
 }

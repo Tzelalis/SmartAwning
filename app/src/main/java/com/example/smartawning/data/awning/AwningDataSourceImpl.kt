@@ -31,18 +31,19 @@ class AwningDataSourceImpl(private val repo: AwningRepository) : AwningDataSourc
         return repo.updateRainSensor(ipAddress, isEnable)
     }
 
-    override suspend fun updateTimeProgram(
-        ipAddress: String,
-        isEnable: Boolean,
-        startHour: String,
-        startMin: String,
-        stopHour: String,
-        stopMin: String
-    ): SensorResponse {
-        return repo.updateTimeProgram(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
+    override suspend fun updateEnableProgram(ipAddress: String, isEnable: Boolean): SensorResponse {
+        return repo.updateTimeProgram(ipAddress, isEnable)
     }
 
     override suspend fun updateAwningPosition(ipAddress: String, position : Int): SensorResponse {
         return repo.updateAwningPosition(ipAddress, position)
+    }
+
+    override suspend fun updateStartTimeProgram(ipAddress: String, startHour: Int, startMin: Int): SensorResponse {
+        return repo.updateStartTimeProgram(ipAddress, startHour, startMin)
+    }
+
+    override suspend fun updateEndTimeProgram(ipAddress: String, stopHour: Int, stopMin: Int): SensorResponse {
+        return repo.updateEndTimeProgram(ipAddress, stopHour, stopMin)
     }
 }

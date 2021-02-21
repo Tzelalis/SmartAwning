@@ -21,7 +21,9 @@ class AwningDetailsViewModel @Inject constructor(
     private val insertLocalAwningUseCase: InsertLocalAwningUseCase,
     private val deleteLocalAwningUseCase: DeleteLocalAwningUseCase,
     private val updateLocalAwningUseCase: UpdateLocalAwningUseCase,
-    private val updateTimeProgramUseCase: UpdateTimeProgramUseCase,
+    private val updateEnableProgramUseCase: UpdateEnableProgramUseCase,
+    private val updateStartTimeProgramUseCase: UpdateStartTimeProgramUseCase,
+    private val updateEndTimeProgramUseCase: UpdateEndTimeProgramUseCase,
     private val updateRainSensorUseCase: UpdateRainSensorUseCase,
     private val updateSunSensorUseCase: UpdateSunSensorUseCase,
     private val updateAwningPositionUseCase: UpdateAwningPositionUseCase,
@@ -65,9 +67,21 @@ class AwningDetailsViewModel @Inject constructor(
         }
     }
 
-    fun updateTimeProgram(ipAddress: String, isEnable: Boolean, startHour: String, startMin: String, stopHour: String, stopMin: String) {
+    fun updateEnableProgram(ipAddress: String, isEnable: Boolean) {
         launch(true) {
-            updateTimeProgramUseCase(ipAddress, isEnable, startHour, startMin, stopHour, stopMin)
+            updateEnableProgramUseCase(ipAddress, isEnable)
+        }
+    }
+
+    fun updateStartTimeProgram(ipAddress: String, startTime : Int, startMin : Int)  {
+        launch(true)    {
+            updateStartTimeProgramUseCase(ipAddress, startTime, startMin)
+        }
+    }
+
+    fun updateEndTimeProgram(ipAddress : String, endHour : Int, endMin : Int)   {
+        launch(true)    {
+            updateStartTimeProgramUseCase(ipAddress, endHour, endMin)
         }
     }
 

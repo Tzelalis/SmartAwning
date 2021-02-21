@@ -2,6 +2,7 @@ package com.example.smartawning.ui.awningdetails
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -21,6 +22,7 @@ import com.example.smartawning.databinding.FragmentAwningDetailsBinding
 import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
+import com.google.android.material.slider.Slider
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,14 +64,14 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             positionSlider.value = config.position.toFloat()
 
             //todo better if state
-            if(!sunSwitcher.isVisible)    {
+            if (!sunSwitcher.isVisible) {
                 setupViewsWithDataFirstTime()
             }
         }
     }
 
-    private fun setupViewsWithDataFirstTime()   {
-        with(binding)   {
+    private fun setupViewsWithDataFirstTime() {
+        with(binding) {
             controlConstraintLayout.animation = null
             rainConstraintLayout.animation = null
             sunConstraintLayout.animation = null
@@ -131,7 +133,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                 if (sunSwitcher.isChecked) {
+                if (sunSwitcher.isChecked) {
                     binding.sunImageView.setImageResource(R.drawable.ic_sun)
                 } else {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)
@@ -139,42 +141,52 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             timeSwitcher.setOnClickListener {
-                viewModel.updateTimeProgram(args.awning.ipAddress, timeSwitcher.isChecked, "0", "0", "0", "0")
+                viewModel.updateEnableProgram(args.awning.ipAddress, timeSwitcher.isChecked)
             }
 
             timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                if(timeSwitcher.isChecked){
+                if (timeSwitcher.isChecked) {
                     binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
-                }else   {
+                } else {
                     binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
                     binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
                     binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.tab_indicator_text, null))
                 }
             }
 
-            startTimeTextView.setOnClickListener{
+            startTimeTextView.setOnClickListener {
                 val materialTimePicker = MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_12H)
                     .setTitleText(resources.getString(R.string.selectTimeStartTitle))
                     .build()
 
                 materialTimePicker.addOnPositiveButtonClickListener {
-                    startTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
+                    viewModel.updateStartTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
+                    startTimeTextView.text = String.format(
+                        resources.getString(R.string.timeFormat),
+                        materialTimePicker.hour.toString(),
+                        materialTimePicker.minute.toString()
+                    )
                 }
 
                 materialTimePicker.show(requireActivity().supportFragmentManager, "startTime")
             }
 
-            stopTimeTextView.setOnClickListener{
+            stopTimeTextView.setOnClickListener {
                 val materialTimePicker = MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_12H)
                     .setTitleText(resources.getString(R.string.selectTimeEndTitle))
                     .build()
 
                 materialTimePicker.addOnPositiveButtonClickListener {
-                    stopTimeTextView.text = String.format(resources.getString(R.string.timeFormat),  materialTimePicker.hour.toString(), materialTimePicker.minute.toString())
+                    viewModel.updateStartTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
+                    stopTimeTextView.text = String.format(
+                        resources.getString(R.string.timeFormat),
+                        materialTimePicker.hour.toString(),
+                        materialTimePicker.minute.toString()
+                    )
                 }
 
                 materialTimePicker.show(requireActivity().supportFragmentManager, "stopTime")
@@ -184,6 +196,14 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                 progressBar.progress = value.toInt()
                 positionPercentTextView.text = value.toInt().toString()
             }
+
+            positionSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: Slider) {}
+
+                override fun onStopTrackingTouch(slider: Slider) {
+                    viewModel.updateAwningPosition(args.awning.ipAddress, slider.value.toInt())
+                }
+            })
         }
     }
 

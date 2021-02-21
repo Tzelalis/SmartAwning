@@ -15,15 +15,12 @@ interface AwningDataSource {
 
     suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse
 
-    suspend fun updateTimeProgram(
-        ipAddress: String,
-        isEnable: Boolean,
-        startHour: String,
-        startMin: String,
-        stopHour: String,
-        stopMin: String
-    ): SensorResponse
+    suspend fun updateEnableProgram(ipAddress: String, isEnable: Boolean, ): SensorResponse
 
     suspend fun updateAwningPosition(ipAddress: String, position : Int): SensorResponse
+
+    suspend fun updateStartTimeProgram(ipAddress: String,  startHour: Int, startMin: Int) : SensorResponse
+
+    suspend fun updateEndTimeProgram(ipAddress: String, stopHour: Int, stopMin: Int) : SensorResponse
 
 }
