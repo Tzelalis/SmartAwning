@@ -181,7 +181,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     .build()
 
                 materialTimePicker.addOnPositiveButtonClickListener {
-                    viewModel.updateStartTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
+                    viewModel.updateEndTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
                     stopTimeTextView.text = String.format(
                         resources.getString(R.string.timeFormat),
                         materialTimePicker.hour.toString(),

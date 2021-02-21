@@ -81,7 +81,7 @@ class AwningDetailsViewModel @Inject constructor(
 
     fun updateEndTimeProgram(ipAddress : String, endHour : Int, endMin : Int)   {
         launch(true)    {
-            updateStartTimeProgramUseCase(ipAddress, endHour, endMin)
+            updateEndTimeProgramUseCase(ipAddress, endHour, endMin)
         }
     }
 

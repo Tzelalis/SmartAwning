@@ -56,7 +56,7 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
 
     override suspend fun updateEndTimeProgram(ipAddress: String, endHour : Int, endMin : Int): SensorResponse {
         return apiCall {
-            api.updateStartTimeProgram(endHour, endMin)
+            api.updateEndTimeProgram(endHour, endMin)
         }.toSensorResponse()
     }
 }
