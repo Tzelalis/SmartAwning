@@ -11,6 +11,7 @@ import com.example.smartawning.usecase.localawning.InsertLocalAwningUseCase
 import com.example.smartawning.usecase.localawning.UpdateLocalAwningUseCase
 import com.example.vaseisapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -29,17 +30,63 @@ class AwningDetailsViewModel @Inject constructor(
     private val updateAwningPositionUseCase: UpdateAwningPositionUseCase,
 ) : BaseViewModel() {
 
-    private var _awningConfig = MutableLiveData<AwningConfig>()
-    val awningConfig: LiveData<AwningConfig> = _awningConfig
+    private var _temperature = MutableLiveData<String>()
+    val temperature : LiveData<String> = _temperature
+
+    private var _humidity = MutableLiveData<String>()
+    val humidity : LiveData<String> = _humidity
+
+    private var _isRainEnable = MutableLiveData<Boolean>()
+    val isRainEnable: LiveData<Boolean> = _isRainEnable
+
+    private var _isSunEnable = MutableLiveData<Boolean>()
+    val isSunEnable: LiveData<Boolean> = _isSunEnable
+
+    private var _isProgramEnable = MutableLiveData<Boolean>()
+    val isProgramEnable: LiveData<Boolean> = _isProgramEnable
+
+    private var _programStartTime = MutableLiveData<String>()
+    val programStartTime: LiveData<String> = _programStartTime
+
+    private var _programEndTime = MutableLiveData<String>()
+    val programEndTime: LiveData<String> = _programEndTime
+
+    private var _position = MutableLiveData<Int>()
+    val position: LiveData<Int> = _position
+
+    private var _rainIndicator = MutableLiveData<Boolean>()
+    val rainIndicator: LiveData<Boolean> = _rainIndicator
+
+    private var _sunIndicator = MutableLiveData<Boolean>()
+    val sunIndicator: LiveData<Boolean> = _sunIndicator
+
+    private var _programIndicator = MutableLiveData<Boolean>()
+    val programIndicator: LiveData<Boolean> = _programIndicator
+
+    private var _positionIndicator = MutableLiveData<Boolean>()
+    val positionIndicator: LiveData<Boolean> = _positionIndicator
 
     fun loadAwningConfig(id: String) {
         launch(true) {
-            awningConfigUseCase(id).collect {
-                _awningConfig.value = it
-            }
+            awningConfigUseCase(id).collect { config ->
+                _temperature.value = config.temperature
+                _humidity.value = config.humidity
 
-            //testing
-            //_awningConfig.value = AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")
+                if(rainIndicator.value != true)
+                    _isRainEnable.value = config.isRainChecked
+
+                if(sunIndicator.value != true)
+                _isSunEnable.value = config.isSunnyChecked
+
+                if(programIndicator.value != true){
+                    _isProgramEnable.value = config.isTimeChecked
+                    _programStartTime.value = config.timeStart
+                    _programEndTime.value = config.timeEnd
+                }
+
+                if(positionIndicator.value != true)
+                    _position.value = config.position
+            }
         }
     }
 
@@ -57,37 +104,49 @@ class AwningDetailsViewModel @Inject constructor(
 
     fun updateSunSensor(ipAddress: String, isEnable: Boolean) {
         launch(true) {
+            _sunIndicator.value = true
             updateSunSensorUseCase(ipAddress, isEnable)
+            _sunIndicator.value = false
         }
     }
 
     fun updateRainSensor(ipAddress: String, isEnable: Boolean) {
         launch(true) {
-            updateRainSensorUseCase(ipAddress, isEnable)
+            _rainIndicator.value = true
+            val result = updateRainSensorUseCase(ipAddress, isEnable)
+            _rainIndicator.value = false
         }
     }
 
     fun updateEnableProgram(ipAddress: String, isEnable: Boolean) {
         launch(true) {
+            _programIndicator.value = true
             updateEnableProgramUseCase(ipAddress, isEnable)
+            _programIndicator.value = false
         }
     }
 
-    fun updateStartTimeProgram(ipAddress: String, startTime : Int, startMin : Int)  {
-        launch(true)    {
+    fun updateStartTimeProgram(ipAddress: String, startTime: Int, startMin: Int) {
+        launch(true) {
+            _programIndicator.value = true
             updateStartTimeProgramUseCase(ipAddress, startTime, startMin)
+            _programIndicator.value = false
         }
     }
 
-    fun updateEndTimeProgram(ipAddress : String, endHour : Int, endMin : Int)   {
-        launch(true)    {
+    fun updateEndTimeProgram(ipAddress: String, endHour: Int, endMin: Int) {
+        launch(true) {
+            _programIndicator.value = true
             updateEndTimeProgramUseCase(ipAddress, endHour, endMin)
+            _programIndicator.value = false
         }
     }
 
     fun updateAwningPosition(ipAddress: String, position: Int) {
         launch(true) {
+            _positionIndicator.value = true
             updateAwningPositionUseCase(ipAddress, position)
+            _positionIndicator.value = false
         }
     }
 }

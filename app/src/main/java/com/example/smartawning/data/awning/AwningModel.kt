@@ -24,7 +24,7 @@ data class RemoteDetectAwning(
 
 data class RemoteSensorResponse(
     val code : String?,
-    val message : String?
+    @Json(name = "text")val message : String?
 )
 
 fun RemoteAwningConfig.toAwningConfig(): AwningConfig {

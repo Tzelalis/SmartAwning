@@ -2,7 +2,6 @@ package com.example.smartawning.ui.awningdetails
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -45,30 +44,63 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
 
     private fun setupObservers() {
         with(viewModel) {
-            awningConfig.observe(viewLifecycleOwner, { config ->
-                loadData(config)
+            temperature.observe(viewLifecycleOwner, { temperature->
+                binding.temperatureTextView.text = String.format(resources.getString(R.string.temperatureText), temperature)
+
+                //todo better if state for first show
+                if (!binding.sunSwitcher.isVisible) {
+                    setupViewsWithDataFirstTime()
+                }
+            })
+
+            humidity.observe(viewLifecycleOwner, { humidity ->
+                binding.humidityTextView.text = humidity
+            })
+
+            rainIndicator.observe(viewLifecycleOwner, { flag ->
+                binding.rainIndicator.isVisible = flag
+            })
+
+            sunIndicator.observe(viewLifecycleOwner, { flag ->
+                binding.sunIndicator.isVisible = flag
+            })
+
+            programIndicator.observe(viewLifecycleOwner, { flag ->
+                binding.programIndicator.isVisible = flag
+            })
+
+            positionIndicator.observe(viewLifecycleOwner, { flag ->
+                binding.positionIndicator.isVisible = flag
+            })
+
+            isRainEnable.observe(viewLifecycleOwner, { isChecked ->
+                binding.rainSwitcher.isChecked = isChecked
+            })
+
+            isSunEnable.observe(viewLifecycleOwner, { isChecked ->
+                binding.sunSwitcher.isChecked = isChecked
+            })
+
+            isProgramEnable.observe(viewLifecycleOwner, { isChecked ->
+                binding.timeSwitcher.isChecked = isChecked
+            })
+
+            programStartTime.observe(viewLifecycleOwner, { startTime ->
+                binding.startTimeTextView.text = startTime
+            })
+
+            programEndTime.observe(viewLifecycleOwner, { endTime ->
+                binding.stopTimeTextView.text = endTime
+            })
+
+            position.observe(viewLifecycleOwner, { position ->
+                binding.positionSlider.value = position.toFloat()
             })
 
             loadAwningConfig(args.awning.name)
         }
     }
 
-    private fun loadData(config: AwningConfig) {
-        with(binding) {
-            rainSwitcher.isChecked = config.isRainChecked
-            sunSwitcher.isChecked = config.isSunnyChecked
-            timeSwitcher.isChecked = config.isTimeChecked
-            startTimeTextView.text = config.timeStart
-            stopTimeTextView.text = config.timeEnd
-            temperatureTextView.text = String.format(resources.getString(R.string.temperatureText), config.temperature)
-            positionSlider.value = config.position.toFloat()
-
-            //todo better if state
-            if (!sunSwitcher.isVisible) {
-                setupViewsWithDataFirstTime()
-            }
-        }
-    }
 
     private fun setupViewsWithDataFirstTime() {
         with(binding) {
@@ -78,6 +110,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             timeConstraintLayout.animation = null
 
             temperatureTextView.isVisible = true
+            humidityTextView.isVisible = true
             positionSlider.isVisible = true
             downDescriptionTextView.isVisible = true
             upDescriptionTextView.isVisible = true
