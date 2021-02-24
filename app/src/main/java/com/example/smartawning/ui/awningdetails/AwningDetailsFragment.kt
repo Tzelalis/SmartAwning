@@ -1,6 +1,8 @@
 package com.example.smartawning.ui.awningdetails
 
+import android.R.attr.*
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,15 +15,16 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginStart
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentAwningDetailsBinding
-import com.example.smartawning.domain.entity.AwningConfig
 import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
 import com.google.android.material.slider.Slider
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +47,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
 
     private fun setupObservers() {
         with(viewModel) {
-            temperature.observe(viewLifecycleOwner, { temperature->
+            temperature.observe(viewLifecycleOwner, { temperature ->
                 binding.temperatureTextView.text = String.format(resources.getString(R.string.temperatureText), temperature)
 
                 //todo better if state for first show
@@ -95,22 +98,26 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
 
             position.observe(viewLifecycleOwner, { position ->
                 binding.positionSlider.value = position.toFloat()
+                binding.positionPercentTextView.text = position.toInt().toString()
             })
 
-            loadAwningConfig(args.awning.name)
+            //loadAwningConfig(args.awning.ip)
+            loadAwningConfig("46.176.166.222:300")
         }
     }
 
 
     private fun setupViewsWithDataFirstTime() {
         with(binding) {
-            controlConstraintLayout.animation = null
-            rainConstraintLayout.animation = null
-            sunConstraintLayout.animation = null
-            timeConstraintLayout.animation = null
+            controlCardView.animation = null
+            rainCardView.animation = null
+            sunCardView.animation = null
+            timeCardView.animation = null
 
             temperatureTextView.isVisible = true
             humidityTextView.isVisible = true
+            temperatureImageView.isVisible = true
+            humidityImageView.isVisible = true
             positionSlider.isVisible = true
             downDescriptionTextView.isVisible = true
             upDescriptionTextView.isVisible = true
@@ -143,11 +150,10 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             setHasOptionsMenu(true)
             (activity as? AppActivity)?.supportActionBar?.title = args.awning.name
 
-
-            rainConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
-            sunConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
-            controlConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
-            timeConstraintLayout.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
+            rainCardView.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
+            sunCardView.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
+            controlCardView.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
+            timeCardView.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
 
             rainSwitcher.setOnClickListener {
                 viewModel.updateRainSensor(args.awning.ipAddress, rainSwitcher.isChecked)
@@ -199,8 +205,8 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     viewModel.updateStartTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
                     startTimeTextView.text = String.format(
                         resources.getString(R.string.timeFormat),
-                        materialTimePicker.hour.toString(),
-                        materialTimePicker.minute.toString()
+                        materialTimePicker.hour,
+                        materialTimePicker.minute
                     )
                 }
 
@@ -217,8 +223,8 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     viewModel.updateEndTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
                     stopTimeTextView.text = String.format(
                         resources.getString(R.string.timeFormat),
-                        materialTimePicker.hour.toString(),
-                        materialTimePicker.minute.toString()
+                        materialTimePicker.hour,
+                        materialTimePicker.minute
                     )
                 }
 

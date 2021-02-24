@@ -14,10 +14,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -40,7 +43,8 @@ object AwningModule {
     @Provides
     fun provideRetrofitForAwning(@AwningHttpClient okHttpClient: OkHttpClient, moshi: Moshi): AwningApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://46.176.166.222:300/")
+            //.baseUrl("http://46.176.166.222:300/")
+            .baseUrl("http://localhost/")
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -62,6 +66,7 @@ object AwningModule {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+
 
         if (BuildConfig.DEBUG) {
             okHttpClient.addNetworkInterceptor(httpLoggingInterceptor)
@@ -110,5 +115,11 @@ object AwningModule {
     @Provides
     fun provideUpdateEndTimeProgramUseCase(dataSource: AwningDataSource): UpdateEndTimeProgramUseCase {
         return UpdateEndTimeProgramUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideDetectAwningUseCase(dataSource: AwningDataSource): DetectAwningUseCase {
+        return DetectAwningUseCase(dataSource)
     }
 }

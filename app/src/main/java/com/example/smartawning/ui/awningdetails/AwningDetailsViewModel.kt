@@ -10,16 +10,16 @@ import com.example.smartawning.usecase.localawning.DeleteLocalAwningUseCase
 import com.example.smartawning.usecase.localawning.InsertLocalAwningUseCase
 import com.example.smartawning.usecase.localawning.UpdateLocalAwningUseCase
 import com.example.vaseisapp.base.BaseViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 @HiltViewModel
 class AwningDetailsViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
     private val awningConfigUseCase: AwningConfigUseCase,
-    private val insertLocalAwningUseCase: InsertLocalAwningUseCase,
     private val deleteLocalAwningUseCase: DeleteLocalAwningUseCase,
     private val updateLocalAwningUseCase: UpdateLocalAwningUseCase,
     private val updateEnableProgramUseCase: UpdateEnableProgramUseCase,
@@ -66,9 +66,9 @@ class AwningDetailsViewModel @Inject constructor(
     private var _positionIndicator = MutableLiveData<Boolean>()
     val positionIndicator: LiveData<Boolean> = _positionIndicator
 
-    fun loadAwningConfig(id: String) {
+    fun loadAwningConfig(ip: String) {
         launch(true) {
-            awningConfigUseCase(id).collect { config ->
+            awningConfigUseCase(ip).collect { config ->
                 _temperature.value = config.temperature
                 _humidity.value = config.humidity
 

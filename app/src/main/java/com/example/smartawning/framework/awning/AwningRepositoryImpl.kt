@@ -12,13 +12,16 @@ import com.example.smartawning.utils.apiCall
 class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
     override suspend fun detectAwning(ipAddress: String): DetectAwning {
         return apiCall {
-            api.detectAwning(ipAddress)
+            val url = "http://$ipAddress/device/detect"
+
+            api.detectAwning(url)
         }.toDetectAwning()
     }
 
     override suspend fun getAwningConfig(ipAddress: String): AwningConfig {
         return apiCall {
-            api.getAwningConfig()
+            val url = "http://$ip/device/info"
+            api.getAwningConfig(url)
         }.toAwningConfig()
 
         //return AwningConfig("20", "50", 30, true, true, false, "20:30", "03:30")  //testing
@@ -26,37 +29,43 @@ class AwningRepositoryImpl(private val api: AwningApi) : AwningRepository {
 
     override suspend fun updateRainSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
-            api.updateRainSensor(isEnable)
+            val url = "http://$ip/device/set/water"
+            api.updateRainSensor(url, isEnable)
         }.toSensorResponse()
     }
-
+    val ip = "192.168.2.15"
     override suspend fun updateSunSensor(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
-            api.updateSunSensor(isEnable)
+            val url = "http://$ip/device/set/light"
+            api.updateSunSensor(url, isEnable)
         }.toSensorResponse()
     }
 
     override suspend fun updateTimeProgram(ipAddress: String, isEnable: Boolean): SensorResponse {
         return apiCall {
-            api.updateTimeProgram(isEnable)
+            val url = "http://$ip/device/set/program"
+            api.updateTimeProgram(url, isEnable)
         }.toSensorResponse()
     }
 
     override suspend fun updateAwningPosition(ipAddress: String, position: Int): SensorResponse {
         return apiCall {
-            api.updateAwning(position)
+            val url = "http://$ip/device/set/bar"
+            api.updateAwning(url, position)
         }.toSensorResponse()
     }
 
     override suspend fun updateStartTimeProgram(ipAddress: String, startHour : Int, startMin : Int): SensorResponse {
         return apiCall {
-            api.updateStartTimeProgram(startHour, startMin)
+            val url = "http://$ip/device/set/program"
+            api.updateStartTimeProgram(url, startHour, startMin)
         }.toSensorResponse()
     }
 
     override suspend fun updateEndTimeProgram(ipAddress: String, endHour : Int, endMin : Int): SensorResponse {
         return apiCall {
-            api.updateEndTimeProgram(endHour, endMin)
+            val url = "http://$ip/device/set/program"
+            api.updateEndTimeProgram(url, endHour, endMin)
         }.toSensorResponse()
     }
 }

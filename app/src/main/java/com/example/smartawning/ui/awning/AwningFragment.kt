@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.smartawning.R
@@ -18,10 +17,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AwningFragment : BaseFragment<FragmentAwningBinding>() {
 
-    private val viewModel : AwningViewModel by viewModels()
-    private var adapter : AwningAdapter? = null
+    private val viewModel: AwningViewModel by viewModels()
+    private var adapter: AwningAdapter? = null
 
-    override fun getViewBinding(): FragmentAwningBinding  = FragmentAwningBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentAwningBinding = FragmentAwningBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +29,7 @@ class AwningFragment : BaseFragment<FragmentAwningBinding>() {
         setupViews()
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         with(viewModel) {
             showAwningDetails.observe(viewLifecycleOwner, { awning ->
                 val action = AwningFragmentDirections.actionAwningFragmentToMainFragment(awning)
@@ -45,12 +44,12 @@ class AwningFragment : BaseFragment<FragmentAwningBinding>() {
         }
     }
 
-    private fun setupViews(){
+    private fun setupViews() {
         setHasOptionsMenu(true)
         (activity as? AppActivity)?.supportActionBar?.title = "Έξυπνη Τέντα"
 
-        with(binding)   {
-            val listener = object : AwningAdapter.AwningListener{
+        with(binding) {
+            val listener = object : AwningAdapter.AwningListener {
                 override fun onAwningItemClick(awning: AwningEntity) {
                     viewModel.showDetails(awning)
                 }
@@ -67,7 +66,12 @@ class AwningFragment : BaseFragment<FragmentAwningBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.addItem -> viewModel.insertLocalAwning(AwningEntity( ipAddress = "ip", name = "name", macAddress = "mac"))     //testing
+            R.id.addItem -> {
+                //viewModel.insertLocalAwning(AwningEntity(ipAddress = "ip", name = "name", macAddress = "mac"))
+
+                val action = AwningFragmentDirections.actionAwningFragmentToAddAwning()
+                findNavController().safeNavigate(action, R.id.awningFragment)
+            }
             else -> super.onOptionsItemSelected(item)
         }
         return true

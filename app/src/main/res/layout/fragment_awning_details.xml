@@ -19,6 +19,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/live_data_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,9 +61,11 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/ic_humidity"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/humidityTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/humidityTextView" />
+                app:layout_constraintTop_toTopOf="@id/humidityTextView"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/temperatureImageView"
@@ -71,9 +74,11 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/ic_thermometer"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/temperatureTextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/temperatureTextView" />
+                app:layout_constraintTop_toTopOf="@id/temperatureTextView"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/temperatureTextView"

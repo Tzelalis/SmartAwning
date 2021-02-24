@@ -3,32 +3,34 @@
 
     <string name="toolbar_title">Smart Awning</string>
 
+    <string name="connectionLost">Connection lost</string>
+
     <string name="rename_item">Rename</string>
     <string name="delete_item">Delete</string>
 
     <string name="rainTitle">Rain</string>
-    <string name="rainDescription">The awning goes down automatically when it rains.</string>
+    <string name="rainDescription">The awning opens automatically when it rains.</string>
 
     <string name="sunTitle">Sun</string>
-    <string name="sunDescription">The awning goes down automatically when it\'s sunny.</string>
+    <string name="sunDescription">The awning opens automatically when it\'s sunny.</string>
 
-    <string name="timeTitle">Time</string>
-    <string name="timeDescription">sdf</string>
+    <string name="timeTitle">Program</string>
+    <string name="timeDescription">Τhe awning will remain open during the selected hours</string>
 
     <string name="selectTimeStartTitle">Select starting time</string>
     <string name="selectTimeEndTitle">Select ending time</string>
 
     <string name="deleteDialogTitle">Delete</string>
-    <string name="deleteDescription">%1$s</string>
+    <string name="deleteDescription">Are you sure you want to permanently delete \"%1$s\"?</string>
     <string name="deleteDialogPositiveButton">Delete</string>
     <string name="deleteDialogNegativeButton">No</string>
     <string name="renameDialogTitle">Rename</string>
-    <string name="renameDialogDescription">Rename</string>
+    <string name="renameDialogDescription">Rename awning \"%1$s\" to:</string>
     <string name="renameDialogPositiveButton">Rename</string>
     <string name="renameDialogNegativeButton">Cancel</string>
     <string name="addItem">Add</string>
 
-    <string name="timeFormat" translatable="false">%1$s:%2$s</string>
+    <string name="timeFormat" translatable="false">%02d:%02d</string>
     <string name="downAwningPosition">Down</string>
     <string name="upAwningPosition">Up</string>
 

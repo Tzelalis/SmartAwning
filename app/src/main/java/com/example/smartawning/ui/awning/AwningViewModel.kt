@@ -11,10 +11,14 @@ import com.example.vaseisapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Appendable
 import javax.inject.Inject
+import android.net.ConnectivityManager
+
+
+
 
 @HiltViewModel
 class AwningViewModel @Inject constructor(
-    private val database : AppDatabase,
+    private val database: AppDatabase,
     private val insertLocalAwningUseCase: InsertLocalAwningUseCase,
     private val getAllLocalAwningsUseCase: GetAllLocalAwningsUseCase
 ) : BaseViewModel() {
@@ -25,7 +29,7 @@ class AwningViewModel @Inject constructor(
     val awningList : LiveData<List<AwningEntity>> = _awningList
 
 
-    fun showDetails(awning : AwningEntity) {
+    fun showDetails(awning: AwningEntity) {
         launch(true, 100) {
             _showAwningDetails.value = awning
         }
@@ -43,4 +47,6 @@ class AwningViewModel @Inject constructor(
             loadLocalAwnings()
         }
     }
+
+
 }

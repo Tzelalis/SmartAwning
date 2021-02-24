@@ -13,5 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">#F4F4F4</item>
+
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
     </style>
+
+
+    <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Snackbar</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="actionTextColorAlpha">1</item>
+        <item name="android:innerRadius">0dp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Snackbar" parent="">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorOnSurface">@color/purple_500</item>
+    </style>
+
 </resources>

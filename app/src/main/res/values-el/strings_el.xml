@@ -2,6 +2,8 @@
 <resources>
     <string name="toolbar_title">Έξυπνη Τέντα</string>
 
+    <string name="connectionLost">Δεν υπάρχει σύνδεση σε κάποιο δίκτυο.</string>
+
     <string name="rename_item">Μετονομασία</string>
     <string name="delete_item">Διαγραφή</string>
 
@@ -11,7 +13,7 @@
     <string name="sunTitle">Ήλιος</string>
     <string name="sunDescription">Η τέντα θα ανεβαίνει αυτόματα όταν έχει ηλιοφάνεια.</string>
 
-    <string name="timeTitle">Ωριαίο Πρόγραμμα</string>
+    <string name="timeTitle">Πρόγραμμα</string>
     <string name="timeDescription">Η τέντα θα παραμένει πάντα κατεβασμένη κατά την διάρκεια των επιλεγμένων ωρών.</string>
 
     <string name="selectTimeStartTitle">Επιλέξτε ώρα έναρξης</string>
@@ -30,6 +32,6 @@
     <string name="downAwningPosition">Κατεβασμένη</string>
     <string name="upAwningPosition">Ανεβασμένη</string>
 
-    <string name="live_data_description">Ανανέωση πληροφοριών ανά 5\</string>
+    <string name="live_data_description">Ανανέωση πληροφοριών ανά 5\'\'</string>
 
 </resources>

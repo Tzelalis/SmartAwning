@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_awningFragment_to_addAwning"
+            app:destination="@id/addAwning" />
     </fragment>
 
     <fragment
@@ -28,4 +31,18 @@
             android:name="awning"
             app:argType="com.example.smartawning.domain.entity.AwningEntity" />
     </fragment>
+    <fragment
+        android:id="@+id/addAwning"
+        android:name="com.example.smartawning.ui.addawning.AddAwningFragment"
+        android:label="AddAwning"
+        tools:layout="@layout/fragment_add_awning">
+        <action
+            android:id="@+id/action_addAwning_to_addAwningDetailsFragment"
+            app:destination="@id/addAwningDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAwningDetailsFragment"
+        android:name="com.example.smartawning.ui.addawningdetails.AddAwningDetailsFragment"
+        android:label="AddAwningDetailsFragment"
+        tools:layout="@layout/fragment_add_awning_details"/>
 </navigation>
