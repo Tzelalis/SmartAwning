@@ -19,4 +19,8 @@ class LocalAwningDataSourceImpl(private val repo : LocalAwningRepository) : Loca
     override suspend fun updateAwning(awning: AwningEntity) {
         repo.updateAwning(awning)
     }
+
+    override suspend fun getAllByMac(mac : String): List<AwningEntity> {
+        return repo.getAllByMac(mac)
+    }
 }

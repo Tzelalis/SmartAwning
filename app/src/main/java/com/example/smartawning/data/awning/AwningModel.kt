@@ -17,9 +17,11 @@ data class RemoteAwningConfig(
 )
 
 data class RemoteDetectAwning(
-    val ip: String?,
-    val name: String?,
-    val mac: String?
+    @Json(name = "name") var name: String?,
+    @Json(name = "ip") var localIp: String?,
+    @Json(name = "public_ip") var publicIp : String?,
+    @Json(name = "public_port") var publicPort : String?,
+    @Json(name = "mac_address") val macAddress: String?
 )
 
 data class RemoteSensorResponse(
@@ -42,9 +44,11 @@ fun RemoteAwningConfig.toAwningConfig(): AwningConfig {
 
 fun RemoteDetectAwning.toDetectAwning(): DetectAwning {
     return DetectAwning(
-        ip ?: "",
         name ?: "",
-        mac ?: ""
+        localIp ?: "",
+        publicIp ?: "",
+        publicPort ?: "",
+        macAddress ?: ""
     )
 }
 

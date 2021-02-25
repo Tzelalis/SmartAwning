@@ -13,8 +13,10 @@ abstract class AppDatabase : RoomDatabase() {
 @Entity(tableName = "awning")
 data class AwningEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "ip_address") var ipAddress: String,
+    @ColumnInfo(name = "ip_address") var localIp: String,
     @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "public_ip") var publicIp : String,
+    @ColumnInfo(name = "public_port") var publicPort : String,
     @ColumnInfo(name = "mac_address") val macAddress: String
 ) : Parcelable
 
@@ -23,9 +25,8 @@ interface AwningDao {
     @Query("SELECT * FROM awning")
     suspend fun getAllAwning(): List<AwningEntity>
 
-    @Query("SELECT * FROM awning WHERE id = :id")
-    suspend fun loadAllByIds(id: Int): List<AwningEntity>
-
+    @Query("SELECT * FROM awning WHERE id = :mac")
+    suspend fun loadAllByMac(mac: String): List<AwningEntity>
 
     @Insert
     suspend fun insertAwning(awning: AwningEntity)

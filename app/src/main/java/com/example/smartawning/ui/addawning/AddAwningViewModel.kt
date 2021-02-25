@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.smartawning.domain.entity.DetectAwning
 import com.example.smartawning.usecase.awning.DetectAwningUseCase
 import com.example.vaseisapp.base.BaseViewModel
-import com.squareup.moshi.internal.Util
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import java.io.IOException
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -25,7 +23,7 @@ class AddAwningViewModel @Inject constructor(
     val detected: LiveData<DetectAwning> = _detected
 
     private val _stopRotationAnimation = MutableLiveData<Unit>()
-    val stopRotationAnimation : LiveData<Unit> = _stopRotationAnimation
+    val stopRotationAnimation: LiveData<Unit> = _stopRotationAnimation
 
     fun scanLocalNetwork(ipAddress: String) {
         launch(true) {
@@ -50,11 +48,11 @@ class AddAwningViewModel @Inject constructor(
 
                 _detected.value = result
 
-                Log.v("PING", "Success" + result.ip + result.mac + result.name)
+                Log.v("PING", "Success $result")
             } catch (ex: UnknownHostException) {
-                Log.v("PING", "UnknownHostException" + ex.message.toString())
+                Log.v("PING", "UnknownHostException " + ex.message.toString())
             } catch (ex: IOException) {
-                Log.v("PING", "IOException" + ex.message.toString())
+                Log.v("PING", "IOException " + ex.message.toString())
             }
         }
     }

@@ -1,10 +1,16 @@
 package com.example.smartawning.domain.entity
 
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
+import com.squareup.moshi.Json
+
 
 data class DetectAwning(
-    val ip : String,
-    val name : String,
-    val mac : String
+    var name: String,
+    var localIp: String,
+    var publicId : String,
+    var publicPort : String,
+    val macAddress: String
 )
 
 data class AwningConfig(

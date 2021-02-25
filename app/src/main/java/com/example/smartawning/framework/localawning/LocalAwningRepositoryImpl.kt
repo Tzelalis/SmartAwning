@@ -20,4 +20,10 @@ class LocalAwningRepositoryImpl(private val database: AppDatabase) : LocalAwning
     override suspend fun updateAwning(awning: AwningEntity) {
         database.userDao().updateAwning(awning)
     }
+
+    override suspend fun getAllByMac(mac: String): List<AwningEntity> {
+        return database.userDao().getAllAwning()
+    }
+
+
 }

@@ -1,8 +1,6 @@
 package com.example.smartawning.ui.awningdetails
 
-import android.R.attr.*
 import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,7 +13,6 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
-import androidx.core.view.marginStart
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,7 +21,6 @@ import com.example.smartawning.databinding.FragmentAwningDetailsBinding
 import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
 import com.google.android.material.slider.Slider
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -146,6 +142,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
     }
 
     private fun setupViews() {
+        //TODO handle public or local ip
         with(binding) {
             setHasOptionsMenu(true)
             (activity as? AppActivity)?.supportActionBar?.title = args.awning.name
@@ -156,11 +153,11 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             timeCardView.animation = AnimationUtils.loadAnimation(context, R.anim.blinking)
 
             rainSwitcher.setOnClickListener {
-                viewModel.updateRainSensor(args.awning.ipAddress, rainSwitcher.isChecked)
+                viewModel.updateRainSensor("${args.awning.publicIp}:${args.awning.publicPort}", rainSwitcher.isChecked)
             }
 
             rainSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                if (rainSwitcher.isChecked) {
+                if (isChecked) {
                     binding.rainImageView.setImageResource(R.drawable.ic_rainy)
                 } else {
                     binding.rainImageView.setImageResource(R.drawable.ic_not_rainy)
@@ -168,11 +165,11 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             sunSwitcher.setOnClickListener {
-                viewModel.updateSunSensor(args.awning.ipAddress, sunSwitcher.isChecked)
+                viewModel.updateSunSensor("${args.awning.publicIp}:${args.awning.publicPort}", sunSwitcher.isChecked)
             }
 
             sunSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                if (sunSwitcher.isChecked) {
+                if (isChecked) {
                     binding.sunImageView.setImageResource(R.drawable.ic_sun)
                 } else {
                     binding.sunImageView.setImageResource(R.drawable.ic_not_sun)
@@ -180,11 +177,11 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             }
 
             timeSwitcher.setOnClickListener {
-                viewModel.updateEnableProgram(args.awning.ipAddress, timeSwitcher.isChecked)
+                viewModel.updateEnableProgram("${args.awning.publicIp}:${args.awning.publicPort}", timeSwitcher.isChecked)
             }
 
             timeSwitcher.setOnCheckedChangeListener { _, isChecked ->
-                if (timeSwitcher.isChecked) {
+                if (isChecked) {
                     binding.startTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.seperatorTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
                     binding.stopTimeTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.purple_500, null))
@@ -202,7 +199,11 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     .build()
 
                 materialTimePicker.addOnPositiveButtonClickListener {
-                    viewModel.updateStartTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
+                    viewModel.updateStartTimeProgram(
+                        "${args.awning.publicIp}:${args.awning.publicPort}",
+                        materialTimePicker.hour,
+                        materialTimePicker.minute
+                    )
                     startTimeTextView.text = String.format(
                         resources.getString(R.string.timeFormat),
                         materialTimePicker.hour,
@@ -220,7 +221,11 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                     .build()
 
                 materialTimePicker.addOnPositiveButtonClickListener {
-                    viewModel.updateEndTimeProgram(args.awning.ipAddress, materialTimePicker.hour, materialTimePicker.minute)
+                    viewModel.updateEndTimeProgram(
+                        "${args.awning.publicIp}:${args.awning.publicPort}",
+                        materialTimePicker.hour,
+                        materialTimePicker.minute
+                    )
                     stopTimeTextView.text = String.format(
                         resources.getString(R.string.timeFormat),
                         materialTimePicker.hour,
@@ -240,7 +245,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                 override fun onStartTrackingTouch(slider: Slider) {}
 
                 override fun onStopTrackingTouch(slider: Slider) {
-                    viewModel.updateAwningPosition(args.awning.ipAddress, slider.value.toInt())
+                    viewModel.updateAwningPosition("${args.awning.publicIp}:${args.awning.publicPort}", slider.value.toInt())
                 }
             })
         }
@@ -321,10 +326,8 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
                 setNeutralButton(resources.getString(R.string.renameDialogNegativeButton)) { dialog, id ->
                     // User cancelled the dialog
                 }
-
             }.create()
         }
-
         alertDialog?.show()
     }
 }

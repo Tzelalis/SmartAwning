@@ -18,7 +18,8 @@
         android:textAllCaps="true"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/refreshButton"
+        app:layout_constraintBottom_toBottomOf="@id/refreshButton"/>
 
     <ImageButton
         android:id="@+id/refreshButton"
@@ -27,12 +28,22 @@
         android:padding="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_baseline_refresh_24"
         android:background="@drawable/round_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/dividerView"/>
+
+    <View
+        android:id="@+id/dividerView"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manualAddAwningTextView"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detectDevicesRecyclerView"
@@ -43,12 +54,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detectedDevicesTextView"
+        app:layout_constraintTop_toBottomOf="@id/refreshButton"
         tools:listitem="@layout/item_detect_awning" />
 
 
     <TextView
-        android:id="@+id/manualAddAwning"
+        android:id="@+id/manualAddAwningTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
@@ -56,7 +67,7 @@
         android:textColor="@color/purple_200"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Προσθήκη συσκευής"

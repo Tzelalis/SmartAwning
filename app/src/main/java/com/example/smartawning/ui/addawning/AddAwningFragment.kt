@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentAddAwningBinding
 import com.example.smartawning.domain.entity.DetectAwning
@@ -46,9 +47,8 @@ class AddAwningFragment : BaseFragment<FragmentAddAwningBinding>() {
             val listener = object : DetectAwningAdapter.DetectAwningListener{
                 override fun onDetectAwningClick(detectAwning: DetectAwning) {
                     //TODO navigate
-                    Log.v("PING", detectAwning.mac)
+                    Log.v("PING", detectAwning.macAddress)
                 }
-
             }
 
             adapter = DetectAwningAdapter(listener)
@@ -59,7 +59,10 @@ class AddAwningFragment : BaseFragment<FragmentAddAwningBinding>() {
                 it.startAnimation(animation)
                 ping()
             }
-
+            manualAddAwningTextView.setOnClickListener {
+                val action = AddAwningFragmentDirections.actionAddAwningToLocalOrPublicAddFragment()
+                findNavController().safeNavigate(action, R.id.addAwning)
+            }
         }
     }
 

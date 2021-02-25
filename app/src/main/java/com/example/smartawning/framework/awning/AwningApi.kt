@@ -11,7 +11,7 @@ import retrofit2.http.Url
 interface AwningApi {
 
     @GET
-    suspend fun detectAwning(@Url ipAddress: String, @Query("smart") type: String = "awning"): Response<RemoteDetectAwning>
+    suspend fun detectAwning(@Url ipAddress: String): Response<RemoteDetectAwning>
 
     @GET
     suspend fun getAwningConfig(@Url url : String): Response<RemoteAwningConfig>

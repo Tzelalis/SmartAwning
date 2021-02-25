@@ -10,4 +10,6 @@ interface LocalAwningDataSource {
     suspend fun insertAwning(awning: AwningEntity)
 
     suspend fun updateAwning(awning: AwningEntity)
+
+    suspend fun getAllByMac(mac : String) : List<AwningEntity>
 }

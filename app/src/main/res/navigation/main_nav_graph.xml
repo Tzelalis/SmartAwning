@@ -37,12 +37,29 @@
         android:label="AddAwning"
         tools:layout="@layout/fragment_add_awning">
         <action
-            android:id="@+id/action_addAwning_to_addAwningDetailsFragment"
-            app:destination="@id/addAwningDetailsFragment" />
+            android:id="@+id/action_addAwning_to_localOrPublicAddFragment"
+            app:destination="@id/localOrPublicAddFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAwningDetailsFragment"
-        android:name="com.example.smartawning.ui.addawningdetails.AddAwningDetailsFragment"
+        android:name="com.example.smartawning.ui.publicadd.PublicAddFragment"
         android:label="AddAwningDetailsFragment"
-        tools:layout="@layout/fragment_add_awning_details"/>
+        tools:layout="@layout/fragment_public_add"/>
+    <fragment
+        android:id="@+id/localOrPublicAddFragment"
+        android:name="com.example.smartawning.ui.localorpublicadd.LocalOrPublicAddFragment"
+        android:label="LocalOrPublicAddFragment"
+        tools:layout="@layout/fragment_local_or_public">
+        <action
+            android:id="@+id/action_localOrPublicAddFragment_to_addAwningDetailsFragment"
+            app:destination="@id/addAwningDetailsFragment" />
+        <action
+            android:id="@+id/action_localOrPublicAddFragment_to_localAddFragment"
+            app:destination="@id/localAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/localAddFragment"
+        android:name="com.example.smartawning.ui.localadd.LocalAddFragment"
+        android:label="LocalAddFragment"
+        tools:layout="@layout/fragment_local_add"/>
 </navigation>

@@ -6,10 +6,7 @@ import com.example.smartawning.data.localawning.LocalAwningRepository
 import com.example.smartawning.domain.datasource.LocalAwningDataSource
 import com.example.smartawning.domain.entity.AppDatabase
 import com.example.smartawning.framework.localawning.LocalAwningRepositoryImpl
-import com.example.smartawning.usecase.localawning.DeleteLocalAwningUseCase
-import com.example.smartawning.usecase.localawning.GetAllLocalAwningsUseCase
-import com.example.smartawning.usecase.localawning.InsertLocalAwningUseCase
-import com.example.smartawning.usecase.localawning.UpdateLocalAwningUseCase
+import com.example.smartawning.usecase.localawning.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,5 +51,11 @@ object LocalAwningModule {
     @Provides
     fun provideUpdateLocalAwningUseCase(dataSource: LocalAwningDataSource): UpdateLocalAwningUseCase {
         return UpdateLocalAwningUseCase(dataSource)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideGetAllAwningByMacUseCase(dataSource: LocalAwningDataSource): GetAllAwningByMacUseCase {
+        return GetAllAwningByMacUseCase(dataSource)
     }
 }

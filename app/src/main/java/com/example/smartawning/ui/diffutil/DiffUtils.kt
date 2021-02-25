@@ -11,6 +11,6 @@ val AWNING_ITEM_DIFF_UTILS = object : DiffUtil.ItemCallback<AwningEntity>() {
 }
 
 val DETECT_AWNING_ITEM_DIFF_UTILS = object : DiffUtil.ItemCallback<DetectAwning>() {
-    override fun areItemsTheSame(oldItem: DetectAwning, newItem: DetectAwning): Boolean = oldItem.mac == newItem.mac
+    override fun areItemsTheSame(oldItem: DetectAwning, newItem: DetectAwning): Boolean = oldItem.macAddress == newItem.macAddress
     override fun areContentsTheSame(oldItem: DetectAwning, newItem: DetectAwning): Boolean = oldItem == newItem
 }
