@@ -98,7 +98,7 @@ class AwningDetailsFragment : BaseFragment<FragmentAwningDetailsBinding>() {
             })
 
             //loadAwningConfig(args.awning.ip)
-            loadAwningConfig("46.176.166.222:300")
+            loadAwningConfig("${args.awning.publicIp}:${args.awning.publicPort}")
         }
     }
 
