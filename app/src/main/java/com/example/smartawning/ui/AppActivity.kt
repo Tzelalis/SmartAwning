@@ -3,6 +3,7 @@ package com.example.smartawning.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
@@ -36,8 +37,22 @@ class AppActivity : AppCompatActivity() {
         supportActionBar?.title = resources.getString(R.string.toolbar_title)
 
         setupObservers()
+        setupOnBackCallBack()
 
         setContentView(binding?.root)
+    }
+
+    private fun setupOnBackCallBack()   {
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                val isNavigated = controller.navigateUp()
+
+                if(!isNavigated)    {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

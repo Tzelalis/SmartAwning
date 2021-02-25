@@ -44,7 +44,11 @@
         android:id="@+id/addAwningDetailsFragment"
         android:name="com.example.smartawning.ui.publicadd.PublicAddFragment"
         android:label="AddAwningDetailsFragment"
-        tools:layout="@layout/fragment_public_add"/>
+        tools:layout="@layout/fragment_public_add">
+        <action
+            android:id="@+id/action_addAwningDetailsFragment_to_awningFragment"
+            app:destination="@id/awningFragment" />
+    </fragment>
     <fragment
         android:id="@+id/localOrPublicAddFragment"
         android:name="com.example.smartawning.ui.localorpublicadd.LocalOrPublicAddFragment"
@@ -61,5 +65,9 @@
         android:id="@+id/localAddFragment"
         android:name="com.example.smartawning.ui.localadd.LocalAddFragment"
         android:label="LocalAddFragment"
-        tools:layout="@layout/fragment_local_add"/>
+        tools:layout="@layout/fragment_local_add">
+        <action
+            android:id="@+id/action_localAddFragment_to_awningFragment"
+            app:destination="@id/awningFragment" />
+    </fragment>
 </navigation>

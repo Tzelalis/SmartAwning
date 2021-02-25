@@ -5,21 +5,17 @@
 
     <string name="connectionLost">Connection lost</string>
 
+    <!--Awning Details Fragment-->
     <string name="rename_item">Rename</string>
     <string name="delete_item">Delete</string>
-
     <string name="rainTitle">Rain</string>
     <string name="rainDescription">The awning opens automatically when it rains.</string>
-
     <string name="sunTitle">Sun</string>
     <string name="sunDescription">The awning opens automatically when it\'s sunny.</string>
-
     <string name="timeTitle">Program</string>
     <string name="timeDescription">Τhe awning will remain open during the selected hours</string>
-
     <string name="selectTimeStartTitle">Select starting time</string>
     <string name="selectTimeEndTitle">Select ending time</string>
-
     <string name="deleteDialogTitle">Delete</string>
     <string name="deleteDescription">Are you sure you want to permanently delete \"%1$s\"?</string>
     <string name="deleteDialogPositiveButton">Delete</string>
@@ -29,12 +25,33 @@
     <string name="renameDialogPositiveButton">Rename</string>
     <string name="renameDialogNegativeButton">Cancel</string>
     <string name="addItem">Add</string>
-
     <string name="timeFormat" translatable="false">%02d:%02d</string>
     <string name="downAwningPosition">Down</string>
     <string name="upAwningPosition">Up</string>
-
     <string name="temperatureText" translatable="false">%1$s\u2103</string>
     <string name="live_data_description">Data refresh every 5\"</string>
     <string name="humidityText" translatable="false">%1$s\%%</string>
+
+    <!--Create New Device Fragmants-->
+    <string name="addDevideManualText">Add device</string>
+    <string name="availableDevicesText">Available Devices</string>
+    <string name="addAwningTitle">Add</string>
+
+    <string name="localOrPublicTitle">Select Network</string>
+    <string name="localOrPublicDescriptionText" >Is the device on the same local network as you or on a remote network</string>
+    <string name="localButtonText">Local</string>
+    <string name="publicButtonText">Other</string>
+    <string name="localOrPublicProceedButtonText">Next</string>
+
+    <string name="localTitle">Local add</string>
+    <string name="publicTitle">Remote add</string>
+    <string name="localAndPublicNameText">Name</string>
+    <string name="localAndPublicSaveButtonText">Save</string>
+    <string name="localDescriptionText">Fill out the fields for local access to device</string>
+    <string name="publicDescriptionText">Fill out the fields for remote access to device</string>
+    <string name="localIpText">Local Ip Address</string>
+    <string name="publicIpText">Remote Ip Address</string>
+    <string name="publicPortText">Port</string>
+    <string name="deviceExistText">Device already exists</string>
+
 </resources>

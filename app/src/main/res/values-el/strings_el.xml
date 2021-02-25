@@ -4,21 +4,17 @@
 
     <string name="connectionLost">Δεν υπάρχει σύνδεση σε κάποιο δίκτυο.</string>
 
+    <!--Awning Details Fragment-->
     <string name="rename_item">Μετονομασία</string>
     <string name="delete_item">Διαγραφή</string>
-
     <string name="rainTitle" translatable="false">Βροχή</string>
     <string name="rainDescription">Η τέντα θα κατεβαίνει αυτόματα όταν βρέχει.</string>
-
     <string name="sunTitle">Ήλιος</string>
     <string name="sunDescription">Η τέντα θα ανεβαίνει αυτόματα όταν έχει ηλιοφάνεια.</string>
-
     <string name="timeTitle">Πρόγραμμα</string>
     <string name="timeDescription">Η τέντα θα παραμένει πάντα κατεβασμένη κατά την διάρκεια των επιλεγμένων ωρών.</string>
-
     <string name="selectTimeStartTitle">Επιλέξτε ώρα έναρξης</string>
     <string name="selectTimeEndTitle">Επιλέξτε ώρα τέλους</string>
-
     <string name="deleteDialogTitle">Διαγραφή</string>
     <string name="deleteDescription">Θέλετε να διαγράψετε οριστικά τη τέντα \"%1$s\";</string>
     <string name="deleteDialogPositiveButton">Διαγραφή</string>
@@ -28,10 +24,30 @@
     <string name="renameDialogPositiveButton">Μετονομασία</string>
     <string name="renameDialogNegativeButton">Ακύρωση</string>
     <string name="addItem">Προσθήκη</string>
-
     <string name="downAwningPosition">Κατεβασμένη</string>
     <string name="upAwningPosition">Ανεβασμένη</string>
-
     <string name="live_data_description">Ανανέωση πληροφοριών ανά 5\'\'</string>
+
+    <!--Create New Device Fragmants-->
+    <string name="addDevideManualText">Προσθήκη συσκευής</string>
+    <string name="availableDevicesText">Διαθέσιμες Συσκευές</string>
+    <string name="addAwningTitle">Προσθήκη</string>
+
+    <string name="localOrPublicTitle">Επιλογή δικτύου</string>
+    <string name="localOrPublicDescriptionText">Η συσκευή που θέλετε να προσθέσετε βρίσκεται στο ίδιο τοπικό δίκτυο που ειστε συνδεδεμένος ή σε κάποιο απομακρυσμένο;</string>\
+    <string name="localButtonText">Τοπικά</string>
+    <string name="publicButtonText">Απομακρυσμένο</string>
+    <string name="localOrPublicProceedButtonText">Επόμενο</string>
+
+    <string name="localTitle">Προσθήκη τοπικά</string>
+    <string name="publicTitle">Προσθήκη απομακρυσμένα</string>
+    <string name="localAndPublicNameText">Όνομα συσκευής</string>
+    <string name="localAndPublicSaveButtonText">Αποθήκευση</string>
+    <string name="localDescriptionText">Συμπληρώστε τα πεδία για τοπική σύνδεση με την συσκευή</string>
+    <string name="publicDescriptionText">Συμπληρώστε τα πεδία για απομακρυσμένη σύνδεση με την συσκευή</string>
+    <string name="localIpText">Τοπική IP</string>
+    <string name="publicIpText">Απομακρυσμένη IP</string>
+    <string name="publicPortText">Πόρτα</string>
+    <string name="deviceExistText">Η συσκευή υπάρχει ήδη</string>
 
 </resources>

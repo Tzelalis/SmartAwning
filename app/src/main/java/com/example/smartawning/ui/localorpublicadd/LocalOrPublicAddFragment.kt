@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentLocalOrPublicBinding
+import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
 
 class LocalOrPublicAddFragment : BaseFragment<FragmentLocalOrPublicBinding>(){
@@ -17,6 +18,8 @@ class LocalOrPublicAddFragment : BaseFragment<FragmentLocalOrPublicBinding>(){
     }
 
     private fun setupView() {
+        (activity as? AppActivity)?.supportActionBar?.title = resources.getString(R.string.localOrPublicTitle)
+
         with(binding)   {
             proceedButton.setOnClickListener {
                 if(publicRadioButton.isChecked){

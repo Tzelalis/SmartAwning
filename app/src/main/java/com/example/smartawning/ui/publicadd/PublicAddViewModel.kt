@@ -39,7 +39,7 @@ class PublicAddViewModel @Inject constructor(
             insertLocalAwningUseCase(
                 AwningEntity(
                     localIp = device.localIp,
-                    publicIp = device.localIp,
+                    publicIp = device.publicIp,
                     publicPort = device.publicPort,
                     name = name,
                     macAddress = device.macAddress

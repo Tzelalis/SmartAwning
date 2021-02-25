@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentAddAwningBinding
 import com.example.smartawning.domain.entity.DetectAwning
+import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +44,8 @@ class AddAwningFragment : BaseFragment<FragmentAddAwningBinding>() {
     }
 
     private fun setupViews() {
+        (activity as? AppActivity)?.supportActionBar?.title = resources.getString(R.string.addAwningTitle)
+
         with(binding) {
             val listener = object : DetectAwningAdapter.DetectAwningListener{
                 override fun onDetectAwningClick(detectAwning: DetectAwning) {

@@ -8,7 +8,7 @@ import com.squareup.moshi.Json
 data class DetectAwning(
     var name: String,
     var localIp: String,
-    var publicId : String,
+    var publicIp : String,
     var publicPort : String,
     val macAddress: String
 )

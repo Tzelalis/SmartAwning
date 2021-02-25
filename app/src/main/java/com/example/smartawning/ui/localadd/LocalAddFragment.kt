@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentLocalAddBinding
 import com.example.smartawning.ui.AppActivity
 import com.example.vaseisapp.base.BaseFragment
@@ -40,7 +41,7 @@ class LocalAddFragment : BaseFragment<FragmentLocalAddBinding>() {
 
     private fun setupViews() {
         setHasOptionsMenu(true)
-        (activity as? AppActivity)?.supportActionBar?.title = "Προσθήκη συσκευής"
+        (activity as? AppActivity)?.supportActionBar?.title = resources.getString(R.string.localTitle)
 
         with(binding) {
             localIpAddressEditText.editText?.filters = getIpTextFilter()
