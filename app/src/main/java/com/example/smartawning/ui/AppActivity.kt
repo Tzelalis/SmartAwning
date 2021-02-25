@@ -1,8 +1,10 @@
 package com.example.smartawning.ui
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -15,6 +17,7 @@ import com.example.smartawning.utils.Variables
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.NullPointerException
 
 
 @AndroidEntryPoint
@@ -42,13 +45,17 @@ class AppActivity : AppCompatActivity() {
         setContentView(binding?.root)
     }
 
+    private fun exitApp()   {
+        super.finish()
+    }
+
     private fun setupOnBackCallBack()   {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
             override fun handleOnBackPressed() {
-                val isNavigated = controller.navigateUp()
+                val isNotStart = controller.navigateUp()
 
-                if(!isNavigated)    {
-                    finish()
+                if(!isNotStart) {
+                    exitApp()
                 }
             }
         }
@@ -58,8 +65,11 @@ class AppActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                if (controller.currentBackStackEntry != null)
+                if (controller.currentBackStackEntry != null){
                     controller.navigateUp()
+                    hideSoftKeyboard()
+                }
+
 
                 return true
             }
@@ -79,5 +89,15 @@ class AppActivity : AppCompatActivity() {
                 snackbar.dismiss()
             }
         })
+    }
+
+    fun hideSoftKeyboard() {
+        try{
+            val inputMethodManager = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
+        }catch (ex : NullPointerException)  {
+
+        }
+
     }
 }

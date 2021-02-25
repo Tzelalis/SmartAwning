@@ -24,6 +24,9 @@ class PublicAddViewModel @Inject constructor(
     private var _showError = MutableLiveData<String>()
     val showError : LiveData<String> = _showError
 
+    private var _insertComplete = MutableLiveData<Unit>()
+    val insertComplete : LiveData<Unit> = _insertComplete
+
     fun insertDevice(ip: String, port: String = "", name: String) {
         launch(true) {
             val device = checkIpForDevice(ip, port)
@@ -45,6 +48,8 @@ class PublicAddViewModel @Inject constructor(
                     macAddress = device.macAddress
                 )
             )
+
+            _insertComplete.value = Unit
         }
     }
 

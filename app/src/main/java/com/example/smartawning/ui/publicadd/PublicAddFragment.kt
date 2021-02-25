@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.smartawning.R
 import com.example.smartawning.databinding.FragmentPublicAddBinding
 import com.example.smartawning.ui.AppActivity
+import com.example.smartawning.ui.localadd.LocalAddFragmentDirections
 import com.example.vaseisapp.base.BaseFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,11 @@ class PublicAddFragment : BaseFragment<FragmentPublicAddBinding>() {
             showError.observe(viewLifecycleOwner, { message ->
                 val snackbar = Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
                 snackbar.show()
+            })
+            insertComplete.observe(viewLifecycleOwner,  {
+                val action = PublicAddFragmentDirections.actionAddAwningDetailsFragmentToAwningFragment()
+                findNavController().navigate(action)
+                (activity as? AppActivity)?.hideSoftKeyboard()
             })
         }
     }

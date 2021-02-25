@@ -36,7 +36,7 @@
     <string name="localOrPublicTitle">Επιλογή δικτύου</string>
     <string name="localOrPublicDescriptionText">Η συσκευή που θέλετε να προσθέσετε βρίσκεται στο ίδιο τοπικό δίκτυο που ειστε συνδεδεμένος ή σε κάποιο απομακρυσμένο;</string>\
     <string name="localButtonText">Τοπικά</string>
-    <string name="publicButtonText">Απομακρυσμένο</string>
+    <string name="publicButtonText">Απομακρυσμένα</string>
     <string name="localOrPublicProceedButtonText">Επόμενο</string>
 
     <string name="localTitle">Προσθήκη τοπικά</string>

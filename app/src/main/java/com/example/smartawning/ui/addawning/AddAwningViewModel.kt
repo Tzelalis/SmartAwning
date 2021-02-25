@@ -35,7 +35,7 @@ class AddAwningViewModel @Inject constructor(
 
                 detect(addr)
 
-                Log.v("PING", "Ping to address: $addr")
+                //Log.v("PING", "Ping to address: $addr")
             }
             //_stopRotationAnimation.value = Unit
         }
@@ -48,11 +48,11 @@ class AddAwningViewModel @Inject constructor(
 
                 _detected.value = result
 
-                Log.v("PING", "Success $result")
+                //Log.v("PING", "Success $result")
             } catch (ex: UnknownHostException) {
-                Log.v("PING", "UnknownHostException " + ex.message.toString())
+                //Log.v("PING", "UnknownHostException " + ex.message.toString())
             } catch (ex: IOException) {
-                Log.v("PING", "IOException " + ex.message.toString())
+                //Log.v("PING", "IOException " + ex.message.toString())
             }
         }
     }

@@ -24,6 +24,9 @@ class LocalAddViewModel @Inject constructor(
     private var _showError = MutableLiveData<String>()
     val showError: LiveData<String> = _showError
 
+    private var _insertComplete = MutableLiveData<Unit>()
+    val insertComplete : LiveData<Unit> = _insertComplete
+
     fun insertDevice(ip: String, name: String) {
         launch(true) {
             val device = detectAwningUseCase(ip)
@@ -37,12 +40,14 @@ class LocalAddViewModel @Inject constructor(
             insertLocalAwningUseCase(
                 AwningEntity(
                     localIp = device.localIp,
-                    publicIp = device.localIp,
+                    publicIp = device.publicIp,
                     publicPort = device.publicPort,
                     name = name,
                     macAddress = device.macAddress
                 )
             )
+
+            _insertComplete.value = Unit
         }
     }
 }

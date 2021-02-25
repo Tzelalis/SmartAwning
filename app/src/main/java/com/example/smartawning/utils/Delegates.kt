@@ -10,7 +10,6 @@ object Variables {
     val liveNetworkConnection : LiveData<Boolean> = _liveNetworkConnection
 
     var isNetworkConnected: Boolean by Delegates.observable(false) { property, oldValue, newValue ->
-        Log.v("TZEL", "$newValue")
         _liveNetworkConnection.postValue(newValue)
     }
 }

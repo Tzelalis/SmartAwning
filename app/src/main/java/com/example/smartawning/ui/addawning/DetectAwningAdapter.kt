@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.smartawning.R
 import com.example.smartawning.databinding.ItemDetectAwningBinding
 import com.example.smartawning.domain.entity.DetectAwning
 import com.example.smartawning.ui.diffutil.DETECT_AWNING_ITEM_DIFF_UTILS
@@ -24,13 +23,15 @@ class DetectAwningAdapter(private val listener: DetectAwningListener) :
     }
 
     override fun onBindViewHolder(holder: DetectAwningViewHolder, position: Int) {
-            holder.bindTo(getItem(position))
+        holder.bindTo(getItem(position))
     }
 
 
     inner class DetectAwningViewHolder(private val binding: ItemDetectAwningBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindTo(detectAwning: DetectAwning) {
             with(binding) {
+                nameTextView.text = detectAwning.name
+                macTextView.text = detectAwning.macAddress
                 root.setOnClickListener { listener.onDetectAwningClick(detectAwning) }
             }
         }

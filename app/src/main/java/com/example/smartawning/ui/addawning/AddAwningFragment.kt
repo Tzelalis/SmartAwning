@@ -47,14 +47,17 @@ class AddAwningFragment : BaseFragment<FragmentAddAwningBinding>() {
         (activity as? AppActivity)?.supportActionBar?.title = resources.getString(R.string.addAwningTitle)
 
         with(binding) {
+
+
             val listener = object : DetectAwningAdapter.DetectAwningListener{
                 override fun onDetectAwningClick(detectAwning: DetectAwning) {
                     //TODO navigate
-                    Log.v("PING", detectAwning.macAddress)
+                    Log.v("TZEL", "Add" + detectAwning.macAddress)
                 }
             }
 
             adapter = DetectAwningAdapter(listener)
+            adapter.submitList(emptyList())
             detectDevicesRecyclerView.adapter = adapter
 
             refreshButton.setOnClickListener {
